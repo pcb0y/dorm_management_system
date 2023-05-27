@@ -25,8 +25,13 @@ SECRET_KEY = 'django-insecure-g=i1a%oizlo!ro7tsm^0vr8-m^n!r@dfdgm6kp_bv&(uoyauur
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
+# 跨域访问地址
+CORS_ALLOWED_ORIGINS = [
+    'http://example.com',
+    'http://localhost:5173' # 前端项目地址
+]
 
 # Application definition
 
@@ -38,7 +43,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'dorm.apps.DormConfig',
-    'rest_framework'
+    'rest_framework',
+    # 解决跨域访问问题
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'dorm_management_system.urls'
@@ -112,7 +120,10 @@ TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
-USE_L10N = True
+
+USE_L10N = False
+DATE_FORMAT = 'Y-m-d'
+DATETIME_FORMAT = 'Y-m-d H:i:s'
 
 USE_TZ = True
 
@@ -139,4 +150,11 @@ DATABASES = {
         'HOST': '119.45.172.137',    # 主机
         'PORT': '3307',         # 数据库使用的端口
     }
+}
+
+
+REST_FRAMEWORK = {
+     # 时间格式配置
+    'DATETIME_FORMAT': "%Y-%m-%d %H:%M:%S",  # 日期时间格式配置
+    'DATE_FORMAT': "%Y-%m-%d",
 }

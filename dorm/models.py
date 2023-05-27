@@ -79,7 +79,8 @@ class Room(models.Model):
     # 关联设备清单
     device_list = models.ForeignKey(to=DeviceList, null=True, on_delete=models.SET_NULL, verbose_name="设备清单")
     # 关联房屋类别清单
-    room_category = models.ForeignKey(to=RoomCategory, null=True, on_delete=models.SET_NULL, verbose_name="房屋类别")
+    room_category = models.ForeignKey(to=RoomCategory, null=True, on_delete=models.SET_NULL, verbose_name="房屋类别",
+                                      )
     # 是否启用
     is_used = models.BooleanField(default=True, verbose_name="是否启用")
 
@@ -123,9 +124,9 @@ class People(models.Model):
     # 关联床号
     bed_number = models.ForeignKey(to=BedNumber, null=True, on_delete=models.SET_NULL, verbose_name="床号")
     # 入住时间
-    check_in_time = models.DateTimeField(verbose_name="入住时间")
+    check_in_time = models.DateField(verbose_name="入住时间")
     # 退房时间
-    check_out_time = models.DateTimeField(verbose_name="退房时间",null=True)
+    check_out_time = models.DateField(verbose_name="退房时间",null=True)
     # 关联用户表
     user = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL, verbose_name="录入人")
     # 押金
@@ -133,7 +134,9 @@ class People(models.Model):
     # 备注
     remark = models.CharField(max_length=11,null=True, verbose_name="备注")
     # 关联房屋
-    room = models.ForeignKey(to=Room, null=True, on_delete=models.SET_NULL, verbose_name="房间号")
+    room = models.ForeignKey(to=Room, null=True, on_delete=models.SET_NULL, related_name="room_name", verbose_name="房间号")
+    # 创建时间
+    create_time = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
 
     def __str__(self):
         return self.name
@@ -145,6 +148,8 @@ class WaterElectricity(models.Model):
     """
     # 关联房间
     room = models.ForeignKey(to=Room, null=True, on_delete=models.SET_NULL, verbose_name="房间编码")
+    # 月数
+    mouth = models.CharField(max_length=6, verbose_name="年月数")
     # 水费表码起
     start_water_code = models.DecimalField(max_digits=20, decimal_places=1, verbose_name="水费表码起")
     # 水费表码止
@@ -195,6 +200,8 @@ class RentDetails(models.Model):
     """
     # 关联员工信息表people
     people = models.ForeignKey(to=People, null=True,  on_delete=models.SET_NULL, verbose_name="姓名")
+    # 年月数
+    mouth = models.CharField(max_length=6, verbose_name="年月数")
     # 应缴金额
     payable_amount = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="应缴金额")
     # 实缴金额
@@ -218,6 +225,8 @@ class RepairReport(models.Model):
     """
     维修明细表
     """
+    # 关联报修人表
+    people = models.ForeignKey(to=People, null=True, on_delete=models.SET_NULL, verbose_name="报修人")
     # 关联房屋表
     room = models.ForeignKey(to=Room, null=True, on_delete=models.SET_NULL, verbose_name="房间号")
     # 报修日期
@@ -238,12 +247,22 @@ class RepairReport(models.Model):
     is_repaired = models.BooleanField(default=False, verbose_name="是否修好")
     # 修复日期
     repair_date = models.DateField(verbose_name='修复日期')
+    # 备注
+    remark = models.CharField(max_length=100, null=True, verbose_name="备注")
 
     def __str__(self):
         return self.is_repaired
 
 
+class DeviceDetail(models.Model):
+    """设备详情表"""
+    room = models.ForeignKey(to=Room, on_delete=models.SET_NULL, null=True, verbose_name="房间号")
+    device_name = models.ForeignKey(to=DeviceList, on_delete=models.SET_NULL, null=True, verbose_name="设备名称")
+    device_number = models.IntegerField(default=1, verbose_name="设备数量")
+    remark = models.CharField(max_length=50, null=True, verbose_name="备注")
 
+    def __str__(self):
+        return self.device_name
 
 
 

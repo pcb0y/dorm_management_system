@@ -8,6 +8,7 @@ from dorm import models
 class RoomView(ModelViewSet):
     """ 房屋管理视图"""
     queryset = models.Room.objects.all()
+
     serializer_class = RoomSerializers
 
 
@@ -15,6 +16,12 @@ class PeopleView(ModelViewSet):
     """人员管理视图"""
     queryset = models.People.objects.all()
     serializer_class = PeopleSerializers
+
+
+class WaterElectricityView(ModelViewSet):
+    """水电管理视图"""
+    queryset = models.WaterElectricity.objects.all()
+    serializer_class = WaterElectricitySerializers
 
 
 class RentDetailsView(ModelViewSet):
@@ -27,6 +34,12 @@ class RepairReportView(ModelViewSet):
     """维修管理视图"""
     queryset = models.RepairReport.objects.all()
     serializer_class = RepairReportSerializers
+
+
+class DeviceDetailView(ModelViewSet):
+    """设备管理视图"""
+    queryset = models.DeviceDetail.objects.all()
+    serializer_class = DeviceDetailSerializers
 # class PeoplesView(ModelViewSet):
 #     queryset = models.People.objects.all()
 #     serializer_class = PeoplesSerializers

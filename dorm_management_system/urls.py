@@ -28,5 +28,7 @@ router.register(r'room', views.RoomView, basename='房屋')  # 向路由器中�
 router.register(r'people', views.PeopleView, basename='人员')  # 向路由器中注册视图集，并起别名
 router.register(r'RentDetails', views.RentDetailsView, basename='RentDetails')  # 向路由器中注册视图集，并起别名
 router.register(r'RepairReport', views.RepairReportView, basename='RepairReport')  # 向路由器中注册视图集，并起别名
+router.register(r'WaterElectricity', views.WaterElectricityView, basename='WaterElectricity')  # 向路由器中注册视图集，并起别名
+router.register(r'DeviceDetail', views.DeviceDetailView, basename='DeviceDetail')  # 设备管理
 # router.register(r'peoples', views.PeoplesView, basename='peoples')  # 向路由器中注册视图集，并起别名
 urlpatterns += router.urls  # 将路由器中的所有路由信息追加到Django的路由列表（urlpatterns）中
