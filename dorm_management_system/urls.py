@@ -18,9 +18,15 @@ from django.urls import path
 from dorm import views
 from rest_framework.routers import DefaultRouter # 导入路由器定义的包
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # path('token/', views.TokenView.as_view()),
+    path('login/', views.LoginView.as_view()),
+
+
     # path('room/', views.RoomView.as_view),
+
 ]
 # DRF框架的路由定义
 router = DefaultRouter()  # 定义可以处理视图的路由器
@@ -30,5 +36,14 @@ router.register(r'RentDetails', views.RentDetailsView, basename='RentDetails')  
 router.register(r'RepairReport', views.RepairReportView, basename='RepairReport')  # 向路由器中注册视图集，并起别名
 router.register(r'WaterElectricity', views.WaterElectricityView, basename='WaterElectricity')  # 向路由器中注册视图集，并起别名
 router.register(r'DeviceDetail', views.DeviceDetailView, basename='DeviceDetail')  # 设备管理
+router.register(r'BuildName', views.BuildNameView, basename='BuildName')  # 楼名
+router.register(r'Floor', views.FloorView, basename='Floor')  # 楼层
+router.register(r'RoomType', views.RoomTypeView, basename='RoomType')  # 房屋类型
+router.register(r'RoomCategory', views.RoomCategoryView, basename='RoomCategory')  # 房屋类别
+router.register(r'Department', views.DepartmentView, basename='Department')  # 部门
+router.register(r'BedNumber', views.BedNumberView, basename='BedNumber')  # 床号
+router.register(r'User', views.UserView, basename='User')  # 用户
+router.register(r'RoomNumber', views.RoomNumberView, basename='RoomNumber')  # 房间号
+
 # router.register(r'peoples', views.PeoplesView, basename='peoples')  # 向路由器中注册视图集，并起别名
 urlpatterns += router.urls  # 将路由器中的所有路由信息追加到Django的路由列表（urlpatterns）中

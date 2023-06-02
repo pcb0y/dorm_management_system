@@ -7,12 +7,39 @@ default_water_price = 1
 default_electricity_price = 1.2
 
 
+class BuildName(models.Model):
+    """楼名"""
+    build_name = models.CharField(max_length=30, null=True, verbose_name="楼名")
+
+    def __str__(self):
+        return self.build_name
+
+    class Mate:
+        verbose_name = "楼名"
+        verbose_name_plural = verbose_name
+
+
+class Floor(models.Model):
+    floor_name = models.CharField(max_length=10, null=True, verbose_name="楼层")
+
+    def __str__(self):
+        return self.floor_name
+
+    class Mate:
+        verbose_name = "楼层"
+        verbose_name_plural = verbose_name
+
+
 class RoomCategory(models.Model):
     """房屋类别"""
     Room_Category_name = models.CharField(max_length=20, null=True, verbose_name="房屋类别")
 
     def __str__(self):
         return self.Room_Category_name
+
+    class Meta:
+        verbose_name = "房屋类别表"
+        verbose_name_plural = verbose_name
 
 
 class DeviceList(models.Model):
@@ -26,6 +53,10 @@ class DeviceList(models.Model):
 
     def __str__(self):
         return self.device_name
+
+    class Meta:
+        verbose_name = "设备清单表"
+        verbose_name_plural = verbose_name
 
 
 class User(models.Model):
@@ -44,6 +75,10 @@ class User(models.Model):
     def __str__(self):
         return self.user_name
 
+    class Meta:
+        verbose_name = "用户表"
+        verbose_name_plural = verbose_name
+
 
 class RoomType(models.Model):
     """
@@ -55,15 +90,19 @@ class RoomType(models.Model):
     def __str__(self):
         return self.type_name
 
+    class Meta:
+        verbose_name = "房屋类型表"
+        verbose_name_plural = verbose_name
+
 
 class Room(models.Model):
     """
         房屋信息表
     """
     # 楼名
-    build_name = models.CharField(max_length=10, verbose_name="楼名")
+    build_name = models.ForeignKey(to=BuildName, null=True, on_delete=models.SET_NULL, verbose_name="楼名")
     # 楼层
-    floor = models.CharField(max_length=10, verbose_name="楼层")
+    floor = models.ForeignKey(to=Floor, null=True, on_delete=models.SET_NULL, verbose_name="楼层")
 
     # 房间号
     room_number = models.CharField(max_length=10, verbose_name="房间号")
@@ -87,6 +126,10 @@ class Room(models.Model):
     def __str__(self):
         return self.room_number
 
+    class Meta:
+        verbose_name = "房屋信息表"
+        verbose_name_plural = verbose_name
+
 
 class Department(models.Model):
     """
@@ -98,6 +141,10 @@ class Department(models.Model):
     def __str__(self):
         return self.department_name
 
+    class Meta:
+        verbose_name = "部门信息表"
+        verbose_name_plural = verbose_name
+
 
 class BedNumber(models.Model):
     """床号"""
@@ -105,6 +152,10 @@ class BedNumber(models.Model):
 
     def __str__(self):
         return self.bed_name
+
+    class Meta:
+        verbose_name = "床号表"
+        verbose_name_plural = verbose_name
 
 
 class People(models.Model):
@@ -126,20 +177,25 @@ class People(models.Model):
     # 入住时间
     check_in_time = models.DateField(verbose_name="入住时间")
     # 退房时间
-    check_out_time = models.DateField(verbose_name="退房时间",null=True)
+    check_out_time = models.DateField(verbose_name="退房时间", null=True)
     # 关联用户表
     user = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL, verbose_name="录入人")
     # 押金
     deposit = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="押金")
     # 备注
-    remark = models.CharField(max_length=11,null=True, verbose_name="备注")
+    remark = models.CharField(max_length=11, null=True, verbose_name="备注")
     # 关联房屋
-    room = models.ForeignKey(to=Room, null=True, on_delete=models.SET_NULL, related_name="room_name", verbose_name="房间号")
+    room = models.ForeignKey(to=Room,  null=True, on_delete=models.SET_NULL,
+                             verbose_name="房间号")
     # 创建时间
     create_time = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = "人员信息表"
+        verbose_name_plural = verbose_name
 
 
 class WaterElectricity(models.Model):
@@ -182,6 +238,10 @@ class WaterElectricity(models.Model):
     def __str__(self):
         return self.electricity_amount
 
+    class Meta:
+        verbose_name = "水电费明细表"
+        verbose_name_plural = verbose_name
+
 
 class Rent(models.Model):
     """
@@ -192,6 +252,10 @@ class Rent(models.Model):
 
     def __str__(self):
         return str(self.rent_price)
+
+    class Meta:
+        verbose_name = "租金分类表"
+        verbose_name_plural = verbose_name
 
 
 class RentDetails(models.Model):
@@ -219,6 +283,10 @@ class RentDetails(models.Model):
 
     def __str__(self):
         return self.balance
+
+    class Meta:
+        verbose_name = "租金明细表"
+        verbose_name_plural = verbose_name
 
 
 class RepairReport(models.Model):
@@ -253,6 +321,10 @@ class RepairReport(models.Model):
     def __str__(self):
         return self.is_repaired
 
+    class Meta:
+        verbose_name = "维修明细表"
+        verbose_name_plural = verbose_name
+
 
 class DeviceDetail(models.Model):
     """设备详情表"""
@@ -263,6 +335,13 @@ class DeviceDetail(models.Model):
 
     def __str__(self):
         return self.device_name
+
+    class Meta:
+        verbose_name = "设备详情表"
+        verbose_name_plural = verbose_name
+
+
+
 
 
 

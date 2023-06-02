@@ -11,7 +11,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
+import datetime
 
+from django.apps import AppConfig
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -44,6 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'dorm.apps.DormConfig',
     'rest_framework',
+    # 注册jwt模块
+
     # 解决跨域访问问题
     'corsheaders',
 ]
@@ -157,4 +161,7 @@ REST_FRAMEWORK = {
      # 时间格式配置
     'DATETIME_FORMAT': "%Y-%m-%d %H:%M:%S",  # 日期时间格式配置
     'DATE_FORMAT': "%Y-%m-%d",
+    # 'DEFAULT_AUTHENTICATION_CLASSES': ['dorm.jwt_authenticate.JWTQueryParamsAuthentication', ],  # JWT 认证注册
+
 }
+APPEND_SLASH=False
