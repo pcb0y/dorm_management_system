@@ -101,6 +101,7 @@ class RepairReportSerializers(serializers.ModelSerializer):
 
 class WaterElectricitySerializers(serializers.ModelSerializer):
     """水电管理序列化器"""
+    room_id = serializers.IntegerField()
 
     class Meta:
         model = WaterElectricity

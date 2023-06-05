@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 # 设置水费单价
-default_water_price = 1
+default_water_price = 4.81
 # 设置电费单价
 default_electricity_price = 1.2
 
@@ -165,7 +165,8 @@ class People(models.Model):
     # 姓名
     name = models.CharField(max_length=10, verbose_name="姓名")
     # 性别
-    sex = models.SmallIntegerField(verbose_name="性别")
+    sex_choices = ((1, "男"), (0, "女"))
+    sex = models.SmallIntegerField(choices=sex_choices, verbose_name="性别")
     # 手机
     phone = models.CharField(max_length=11, verbose_name="手机")
     # 关联部门表
@@ -177,13 +178,13 @@ class People(models.Model):
     # 入住时间
     check_in_time = models.DateField(verbose_name="入住时间")
     # 退房时间
-    check_out_time = models.DateField(verbose_name="退房时间", null=True)
+    check_out_time = models.DateField(verbose_name="退房时间", null=True, blank=True)
     # 关联用户表
     user = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL, verbose_name="录入人")
     # 押金
     deposit = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="押金")
     # 备注
-    remark = models.CharField(max_length=11, null=True, verbose_name="备注")
+    remark = models.CharField(max_length=11, null=True, blank=True, verbose_name="备注")
     # 关联房屋
     room = models.ForeignKey(to=Room,  null=True, on_delete=models.SET_NULL,
                              verbose_name="房间号")
@@ -207,9 +208,9 @@ class WaterElectricity(models.Model):
     # 月数
     mouth = models.CharField(max_length=6, verbose_name="年月数")
     # 水费表码起
-    start_water_code = models.DecimalField(max_digits=20, decimal_places=1, verbose_name="水费表码起")
+    start_water_code = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="水费表码起")
     # 水费表码止
-    end_water_code = models.DecimalField(max_digits=20, decimal_places=1, verbose_name="水费表码止")
+    end_water_code = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="水费表码止")
     # 水表合计
     water_sum = models.DecimalField(max_digits=20, decimal_places=1, verbose_name="水表数")
     # 水费单价
@@ -221,11 +222,11 @@ class WaterElectricity(models.Model):
     water_time = models.DateTimeField(verbose_name="水费抄表时间")
 
     # 电表表码起
-    start_electricity_code = models.DecimalField(max_digits=20, decimal_places=1, verbose_name="电表表码起")
+    start_electricity_code = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="电表表码起")
     # 电表表码止
-    end_electricity_code = models.DecimalField(max_digits=20, decimal_places=1, verbose_name="电表表码止")
+    end_electricity_code = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="电表表码止")
     # 电表合计
-    electricity_sum = models.DecimalField(max_digits=20, decimal_places=1, verbose_name="电表数")
+    electricity_sum = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="电表数")
     # 电费单价
     electricity_price = models.DecimalField(max_digits=20, decimal_places=2, default=default_electricity_price,
                                             verbose_name="电费单价")
@@ -234,9 +235,11 @@ class WaterElectricity(models.Model):
 
     # 电费抄表时间
     electricity_time = models.DateTimeField(verbose_name="电费抄表时间")
+    # 总金额
+    sum_amount = models.DecimalField(default=0, max_digits=20, decimal_places=2, verbose_name="总金额")
 
     def __str__(self):
-        return self.electricity_amount
+        return str(self.sum_amount)
 
     class Meta:
         verbose_name = "水电费明细表"
