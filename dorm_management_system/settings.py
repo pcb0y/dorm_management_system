@@ -129,7 +129,7 @@ USE_L10N = False
 DATE_FORMAT = 'Y-m-d'
 DATETIME_FORMAT = 'Y-m-d H:i:s'
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
@@ -146,13 +146,21 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 pymysql.install_as_MySQLdb()
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',   # 数据库引擎
+    #     'NAME': 'pcb0y',         # 你要存储数据的库名，事先要创建之
+    #     'USER': 'pcb0y',         # 数据库用户名
+    #     'PASSWORD': 'Windows,.1',     # 密码
+    #     'HOST': '192.168.20.7',    # 主机
+    #     'PORT': '3306',         # 数据库使用的端口
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.mysql',   # 数据库引擎
-        'NAME': 'dorm',         # 你要存储数据的库名，事先要创建之
-        'USER': 'root',         # 数据库用户名
-        'PASSWORD': '9b5ff2d0a711ba2a',     # 密码
-        'HOST': '119.45.172.137',    # 主机
-        'PORT': '3307',         # 数据库使用的端口
+        'ENGINE': 'django.db.backends.mysql',  # 数据库引擎
+        'NAME': 'dormtest',  # 你要存储数据的库名，事先要创建之
+        'USER': 'root',  # 数据库用户名
+        'PASSWORD': '9b5ff2d0a711ba2a',  # 密码
+        'HOST': '119.45.172.137',  # 主机
+        'PORT': '3307',  # 数据库使用的端口
     }
 }
 

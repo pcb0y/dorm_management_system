@@ -59,6 +59,21 @@ class DeviceList(models.Model):
         verbose_name_plural = verbose_name
 
 
+class Rent(models.Model):
+    """
+        租金分类表
+    """
+    # 租金单价
+    rent_price = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="租金单价")
+
+    def __str__(self):
+        return str(self.rent_price)
+
+    class Meta:
+        verbose_name = "租金分类表"
+        verbose_name_plural = verbose_name
+
+
 class User(models.Model):
     """
         用户表
@@ -177,12 +192,17 @@ class People(models.Model):
     bed_number = models.ForeignKey(to=BedNumber, null=True, on_delete=models.SET_NULL, verbose_name="床号")
     # 入住时间
     check_in_time = models.DateField(verbose_name="入住时间")
-    # 退房时间
-    check_out_time = models.DateField(verbose_name="退房时间", null=True, blank=True)
+    # 结算时间
+    Settlement_time = models.DateField(default=None, null=True, blank=True, verbose_name="结算时间")
+    # 合同到期时间
+    check_out_time = models.DateField(verbose_name="合同到期日期", null=True, blank=True)
     # 关联用户表
     user = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL, verbose_name="录入人")
     # 押金
     deposit = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="押金")
+    # 关联租金单价表
+    rent_price = models.ForeignKey(to=Rent, null=True, on_delete=models.CASCADE, verbose_name="租金单价")
+    balance = models.DecimalField(default=None, max_digits=20, decimal_places=2, verbose_name="余额", null=True)
     # 备注
     remark = models.CharField(max_length=11, null=True, blank=True, verbose_name="备注")
     # 关联房屋
@@ -219,7 +239,7 @@ class WaterElectricity(models.Model):
     water_amount = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="水费金额")
 
     # 水费抄表时间
-    water_time = models.DateTimeField(verbose_name="水费抄表时间")
+    water_time = models.DateTimeField(auto_now_add=True, verbose_name="水费抄表时间")
 
     # 电表表码起
     start_electricity_code = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="电表表码起")
@@ -234,7 +254,7 @@ class WaterElectricity(models.Model):
     electricity_amount = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="电费金额")
 
     # 电费抄表时间
-    electricity_time = models.DateTimeField(verbose_name="电费抄表时间")
+    electricity_time = models.DateTimeField(auto_now_add=True, verbose_name="电费抄表时间")
     # 总金额
     sum_amount = models.DecimalField(default=0, max_digits=20, decimal_places=2, verbose_name="总金额")
 
@@ -246,43 +266,35 @@ class WaterElectricity(models.Model):
         verbose_name_plural = verbose_name
 
 
-class Rent(models.Model):
-    """
-        租金分类表
-    """
-    # 租金单价
-    rent_price = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="租金单价")
-
-    def __str__(self):
-        return str(self.rent_price)
-
-    class Meta:
-        verbose_name = "租金分类表"
-        verbose_name_plural = verbose_name
-
-
 class RentDetails(models.Model):
     """
         租金明细表
     """
     # 关联员工信息表people
-    people = models.ForeignKey(to=People, null=True,  on_delete=models.SET_NULL, verbose_name="姓名")
-    # 年月数
-    mouth = models.CharField(max_length=6, verbose_name="年月数")
+    people = models.ForeignKey(to=People, null=True,  on_delete=models.CASCADE, verbose_name="姓名")
+
+    year_month = models.CharField(max_length=100, null=True, blank=True, verbose_name="备注")
     # 应缴金额
     payable_amount = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="应缴金额")
-    # 实缴金额
-    actual_amount = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="实缴金额")
-    # 余额
-    balance = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="余额", null=True)
-    # 缴费时间
-    payment_date = models.DateTimeField(verbose_name="缴费时间")
-    # 关联用户表收款人
-    payee = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL, verbose_name="收款人")
-    # 关联租金单价表
-    rent_price = models.ForeignKey(to=Rent, null=True,  on_delete=models.SET_NULL, verbose_name="租金单价")
+
+    # 扣款金额
+    deduction_amount = models.DecimalField(default=None, max_digits=20, decimal_places=2, verbose_name="扣款金额")
+
+    # 扣款时间
+    deduction_time = models.DateTimeField(auto_now_add=True, verbose_name="扣款时间")
+    # 修改时间
+    modified_time = models.DateTimeField(auto_now=True, verbose_name="修改时间")
+    payment_user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name="payment_user", verbose_name="扣费人")
+    create_user = models.ForeignKey(to=User, on_delete=models.CASCADE, verbose_name="创建人")
+    status = (
+        (1, "已缴费"),
+        (0, "未缴费")
+    )
+    payment_status = models.SmallIntegerField(default=0, choices=status, verbose_name="交费状态")
+    # 扣款原因
+    deduction_reason = models.CharField(default=None, max_length=30, null=True, blank=True, verbose_name="扣款原因")
     # 备注
-    remark = models.CharField(max_length=100, null=True, blank=True, verbose_name="备注")
+    remark = models.CharField(default=None, max_length=100, null=True, blank=True, verbose_name="备注")
 
     def __str__(self):
         return self.balance
@@ -319,7 +331,7 @@ class RepairReport(models.Model):
     # 修复日期
     repair_date = models.DateField(verbose_name='修复日期')
     # 备注
-    remark = models.CharField(max_length=100, null=True, verbose_name="备注")
+    remark = models.CharField(max_length=100, null=True, blank=True, verbose_name="备注")
 
     def __str__(self):
         return self.is_repaired
@@ -331,10 +343,11 @@ class RepairReport(models.Model):
 
 class DeviceDetail(models.Model):
     """设备详情表"""
-    room = models.ForeignKey(to=Room, on_delete=models.SET_NULL, null=True, verbose_name="房间号")
+
+    room = models.ForeignKey(to=Room, on_delete=models.CASCADE, verbose_name="房间号")
     device_name = models.ForeignKey(to=DeviceList, on_delete=models.SET_NULL, null=True, verbose_name="设备名称")
     device_number = models.IntegerField(default=1, verbose_name="设备数量")
-    remark = models.CharField(max_length=50, null=True, verbose_name="备注")
+    remark = models.CharField(max_length=50, null=True, blank=True, verbose_name="备注")
 
     def __str__(self):
         return self.device_name
@@ -342,6 +355,31 @@ class DeviceDetail(models.Model):
     class Meta:
         verbose_name = "设备详情表"
         verbose_name_plural = verbose_name
+
+
+class Payment(models.Model):
+    """付款记录表"""
+
+    people = models.ForeignKey(to=People, on_delete=models.CASCADE, verbose_name="付款人")
+    # 实缴金额
+    actual_amount = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="实缴金额")
+
+    # 缴费时间
+    payment_time = models.DateTimeField(auto_now_add=True, verbose_name="缴费时间")
+    # 修改时间
+    modified_time = models.DateTimeField(auto_now=True, verbose_name="修改时间")
+
+    create_user = models.ForeignKey(to=User, on_delete=models.CASCADE, verbose_name="创建人")
+    # 备注
+    remark = models.CharField(max_length=100, null=True, blank=True, verbose_name="备注")
+
+    def __str__(self):
+        return str(self.actual_amount)
+
+    class Meta:
+        verbose_name = "付款记录表"
+        verbose_name_plural = verbose_name
+
 
 
 

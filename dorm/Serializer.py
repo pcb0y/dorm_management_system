@@ -79,13 +79,17 @@ class RoomSerializers(serializers.ModelSerializer):
 
 class RentDetailsSerializers(serializers.ModelSerializer):
     """租金管理序列化器"""
-    name = serializers.CharField(source="people.name")
-    payee = serializers.CharField(source="payee.user_name")
-    rent_price = serializers.DecimalField(max_digits=20, decimal_places=2, source="rent_price.rent_price")
+    create_user_name = serializers.CharField(read_only=True, source="create_user.user_name")
+    payment_user_name = serializers.CharField(read_only=True, source="payment_user.user_name")
+    name = serializers.CharField(read_only=True, source="people.name")
+    room_number = serializers.CharField(read_only=True, source="people.room.room_number")
+    rent_price = serializers.CharField(read_only=True, source="people.rent_price")
+    balance = serializers.CharField(read_only=True, source="people.balance")
 
     class Meta:
         model = RentDetails
         fields = "__all__"
+        # depth = 1
 
 
 class RepairReportSerializers(serializers.ModelSerializer):
@@ -101,7 +105,7 @@ class RepairReportSerializers(serializers.ModelSerializer):
 
 class WaterElectricitySerializers(serializers.ModelSerializer):
     """水电管理序列化器"""
-    room_id = serializers.IntegerField()
+    room_id = serializers.IntegerField(label="房间号ID")
 
     class Meta:
         model = WaterElectricity
@@ -111,6 +115,8 @@ class WaterElectricitySerializers(serializers.ModelSerializer):
 
 class DeviceDetailSerializers(serializers.ModelSerializer):
     """设备详情序列化器"""
+    room_id = serializers.IntegerField(label="房间号ID")
+    device_name_id = serializers.IntegerField(label="设备ID")
 
     class Meta:
         model = DeviceDetail
@@ -140,10 +146,29 @@ class RoomTypeSerializers(serializers.ModelSerializer):
     class Meta:
         model = RoomType
         fields = "__all__"
-# class BuildNameSerializers(serializers.ModelSerializer):
-#     """楼名序列化器"""
-#
-#     class Meta:
-#         model = BuildName
-#         fields = "__all__"
 
+
+class DeviceListSerializers(serializers.ModelSerializer):
+    """设备清单序列化器"""
+    value = serializers.IntegerField(source='id')
+    text = serializers.CharField(source='device_name')
+
+    class Meta:
+        model = DeviceList
+        fields = ["value", "text"]
+
+
+class PaymentSerializers(serializers.ModelSerializer):
+    """付款序列化器"""
+
+    class Meta:
+        model = Payment
+        fields = "__all__"
+
+
+class DeductionSerializers(serializers.ModelSerializer):
+    """扣款序列化器"""
+
+    class Meta:
+        model = RentDetails
+        fields = ["deduction_amount"]

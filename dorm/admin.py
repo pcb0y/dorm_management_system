@@ -15,10 +15,9 @@ admin.site.register(Rent)
 admin.site.register(RentDetails)
 admin.site.register(RepairReport)
 admin.site.register(DeviceDetail)
+admin.site.register(Payment)
 
 
-# Register your models here.
-from django.contrib import admin
 admin.site.site_header = '慕宸宿舍管理系统'
 admin.site.site_title = '慕宸宿舍管理系统'
 admin.site.index_title = '后台管理'

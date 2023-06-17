@@ -2,6 +2,10 @@ from django.shortcuts import render,HttpResponse
 from rest_framework.viewsets import ModelViewSet
 from dorm.Serializer import *
 from dorm import models
+from datetime import date
+from dateutil.relativedelta import relativedelta
+import calendar
+from decimal import Decimal
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import User
@@ -134,8 +138,11 @@ class WaterElectricityView(ModelViewSet):
 
 class RentDetailsView(ModelViewSet):
     """租金管理视图"""
+
     queryset = models.RentDetails.objects.all()
     serializer_class = RentDetailsSerializers
+    sql = queryset.query.__str__()
+    print(sql)
 
 
 class RepairReportView(ModelViewSet):
@@ -196,6 +203,112 @@ class UserView(ModelViewSet):
     """用户视图"""
     queryset = models.User.objects.all()
     serializer_class = UserSerializers
-# class PeoplesView(ModelViewSet):
-#     queryset = models.People.objects.all()
-#     serializer_class = PeoplesSerializers
+
+
+class DeviceListView(ModelViewSet):
+    """设备清单视图"""
+    queryset = models.DeviceList.objects.all()
+    serializer_class = DeviceListSerializers
+
+
+class AddRentDetailsView(APIView):
+    @staticmethod
+    def get(self):
+        peoples = models.People.objects.all().values("id", "rent_price__rent_price", "check_in_time")
+        user = models.User.objects.filter(pk=5).first()
+
+        device_obj_list = []
+        for people in peoples:
+            # 获取当前日期
+            current_date = datetime.date.today()
+
+            # 获取上个月的年份和月份
+            previous_month = current_date.month - 1
+            previous_year = current_date.year
+
+            # 如果当前月份是 1 月，则上个月为去年的 12 月
+            if previous_month == 0:
+                previous_month = 12
+                previous_year -= 1
+
+            # 获取上个月的天数
+            num_days = calendar.monthrange(previous_year, previous_month)[1]
+
+            # 获取入住时间和当前时间的月份差
+            months_diff = relativedelta(date.today(), people['check_in_time'])
+            # print(months_diff.months)
+            if months_diff.months == 0:
+
+                # 按天算租金
+
+                days_diff = date.today() - people['check_in_time']
+                print(days_diff.days)
+                payable_amount = days_diff.days*people["rent_price__rent_price"]/num_days
+
+            else:
+                # 按月算租金
+                payable_amount = people["rent_price__rent_price"]
+            if previous_month < 10:
+                previous_month = "0" + str(previous_month)
+            year_month = str(previous_year)+previous_month
+            print(year_month)
+            # print(months_diff.months)
+            device_obj_list.append(
+                RentDetails(
+                    year_month=year_month, people_id=people["id"], payable_amount=payable_amount, create_user=user
+                )
+            )
+        models.RentDetails.objects.bulk_create(device_obj_list)
+        return HttpResponse("kkk")
+
+
+class PaymentView(ModelViewSet):
+    """付款视图"""
+
+    queryset = models.Payment.objects.all()
+    serializer_class = PaymentSerializers
+
+    def create(self, request):
+        people = self.request.data.get("people")
+        actual_amount = self.request.data.get("actual_amount")
+        obj = models.People.objects.get(pk=people)
+
+        obj.balance += Decimal(actual_amount)
+        obj.save()
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+
+class DeductionView(ModelViewSet):
+    queryset = models.RentDetails.objects.all()
+    serializer_class = DeductionSerializers
+
+    def update(self, request, pk):
+
+        # print(pk)
+        # 获取数据库中扣费的字段如果为空,就不扣费直接返回
+        deduction_amount_db = models.RentDetails.objects.filter(pk=pk).values("deduction_amount")
+        # print(deduction_amount_db)
+        if deduction_amount_db[0].get("deduction_amount"):
+            return_data = {"message": "已经交过费了不允许重复扣费"}
+            return Response(return_data)
+        instance = self.get_object()
+        # print(request.data)
+        serializer = self.get_serializer(instance, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        # 获取前端传递的参数
+        deduction_amount = serializer.validated_data.get("deduction_amount")
+        # print(deduction_amount)
+        # 修改表中的数据
+        instance.deduction_amount = deduction_amount
+        instance.payment_status = 1
+        instance.save()
+        # 更新人员表的余额
+        instance.people.balance -= deduction_amount
+        instance.people.save()
+        return Response(serializer.data)
+
+
+
