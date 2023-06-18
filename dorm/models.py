@@ -135,6 +135,7 @@ class Room(models.Model):
     # 关联房屋类别清单
     room_category = models.ForeignKey(to=RoomCategory, null=True, on_delete=models.SET_NULL, verbose_name="房屋类别",
                                       )
+    WaterElectricity_Balance = models.DecimalField(default=0, max_digits=20, decimal_places=2, verbose_name="水电费余额", null=True)
     # 是否启用
     is_used = models.BooleanField(default=True, verbose_name="是否启用")
 
@@ -206,7 +207,7 @@ class People(models.Model):
     # 备注
     remark = models.CharField(max_length=11, null=True, blank=True, verbose_name="备注")
     # 关联房屋
-    room = models.ForeignKey(to=Room,  null=True, on_delete=models.SET_NULL,
+    room = models.ForeignKey(to=Room,  null=True, on_delete=models.SET_NULL, related_name="people",
                              verbose_name="房间号")
     # 创建时间
     create_time = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
@@ -255,8 +256,25 @@ class WaterElectricity(models.Model):
 
     # 电费抄表时间
     electricity_time = models.DateTimeField(auto_now_add=True, verbose_name="电费抄表时间")
-    # 总金额
-    sum_amount = models.DecimalField(default=0, max_digits=20, decimal_places=2, verbose_name="总金额")
+    # 应付总金额
+    sum_amount = models.DecimalField(default=0, max_digits=20, decimal_places=2, verbose_name="应付总金额")
+    # 扣款金额
+    deduction_amount = models.DecimalField(default=None, max_digits=20, decimal_places=2, verbose_name="扣款金额")
+
+    # 扣款时间
+    deduction_time = models.DateTimeField(auto_now_add=True, verbose_name="扣款时间")
+    # 修改时间
+    modified_time = models.DateTimeField(auto_now=True, verbose_name="修改时间")
+    electricity_payment_user = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL, verbose_name="扣费人")
+    # electricity_create_user = models.ForeignKey(to=User, default=1, on_delete=models.CASCADE, verbose_name="创建人")
+    status = (
+        (1, "已缴费"),
+        (0, "未缴费")
+    )
+    payment_status = models.SmallIntegerField(default=0, choices=status, verbose_name="交费状态")
+    # 扣款原因
+    deduction_reason = models.CharField(default=None, max_length=30, null=True, blank=True, verbose_name="扣款原因")
+    remark = models.CharField(default=None, max_length=100, null=True, blank=True, verbose_name="备注")
 
     def __str__(self):
         return str(self.sum_amount)
@@ -273,7 +291,7 @@ class RentDetails(models.Model):
     # 关联员工信息表people
     people = models.ForeignKey(to=People, null=True,  on_delete=models.CASCADE, verbose_name="姓名")
 
-    year_month = models.CharField(max_length=100, null=True, blank=True, verbose_name="备注")
+    year_month = models.CharField(max_length=100, null=True, blank=True, verbose_name="年月数")
     # 应缴金额
     payable_amount = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="应缴金额")
 
@@ -380,6 +398,29 @@ class Payment(models.Model):
         verbose_name = "付款记录表"
         verbose_name_plural = verbose_name
 
+
+class PaymentWaterElectricity(models.Model):
+    """付款水电费记录表"""
+
+    room_number = models.ForeignKey(to=Room, on_delete=models.CASCADE, verbose_name="房间号")
+    # 实缴金额
+    actual_amount = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="实缴金额")
+
+    # 缴费时间
+    payment_time = models.DateTimeField(auto_now_add=True, verbose_name="缴费时间")
+    # 修改时间
+    modified_time = models.DateTimeField(auto_now=True, verbose_name="修改时间")
+
+    create_user = models.ForeignKey(to=User, on_delete=models.CASCADE, verbose_name="创建人")
+    # 备注
+    remark = models.CharField(max_length=100, null=True, blank=True, verbose_name="备注")
+
+    def __str__(self):
+        return str(self.actual_amount)
+
+    class Meta:
+        verbose_name = "付款水电费记录表"
+        verbose_name_plural = verbose_name
 
 
 

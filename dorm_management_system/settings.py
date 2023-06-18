@@ -173,3 +173,10 @@ REST_FRAMEWORK = {
 
 }
 APPEND_SLASH = False
+
+# 收集静态文件
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'static'),
+# )
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')

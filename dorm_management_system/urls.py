@@ -49,7 +49,10 @@ router.register(r'RoomNumber', views.RoomNumberView, basename='RoomNumber')  # �
 router.register(r'DeviceList', views.DeviceListView, basename='DeviceList')  # 设备清单
 router.register(r'Payment', views.PaymentView, basename='Payment')  # 付款
 router.register(r'Deduction', views.DeductionView, basename='Deduction')  # 扣款
-
+router.register(r'PaymentWaterElectricity', views.PaymentWaterElectricityView,
+                basename='PaymentWaterElectricity')  # 水电费充值
+router.register(r'DeductionWaterElectricity', views.DeductionWaterElectricityView,
+                basename='DeductionWaterElectricity')  # 扣水电费
 
 # router.register(r'peoples', views.PeoplesView, basename='peoples')  # 向路由器中注册视图集，并起别名
 urlpatterns += router.urls  # 将路由器中的所有路由信息追加到Django的路由列表（urlpatterns）中

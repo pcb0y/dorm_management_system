@@ -141,8 +141,8 @@ class RentDetailsView(ModelViewSet):
 
     queryset = models.RentDetails.objects.all()
     serializer_class = RentDetailsSerializers
-    sql = queryset.query.__str__()
-    print(sql)
+    # sql = queryset.query.__str__()
+    # print(sql)
 
 
 class RepairReportView(ModelViewSet):
@@ -282,6 +282,7 @@ class PaymentView(ModelViewSet):
 
 
 class DeductionView(ModelViewSet):
+    """扣租金视图"""
     queryset = models.RentDetails.objects.all()
     serializer_class = DeductionSerializers
 
@@ -311,4 +312,50 @@ class DeductionView(ModelViewSet):
         return Response(serializer.data)
 
 
+class PaymentWaterElectricityView(ModelViewSet):
+    """充值水电费视图"""
+    queryset = models.PaymentWaterElectricity.objects.all()
+    serializer_class = PaymentWaterElectricitySerializers
 
+    def create(self, request):
+        room_number = self.request.data.get("room_number")
+        actual_amount = self.request.data.get("actual_amount")
+        obj = models.Room.objects.get(pk=room_number)
+
+        obj.WaterElectricity_Balance += Decimal(actual_amount)
+        obj.save()
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+
+class DeductionWaterElectricityView(ModelViewSet):
+    """扣水电费视图"""
+    queryset = models.WaterElectricity.objects.all()
+    serializer_class = DeductionWaterElectricitySerializers
+
+    def update(self, request, pk):
+
+        # print(pk)
+        # 获取数据库中扣费的字段如果为空,就不扣费直接返回
+        deduction_amount_db = models.WaterElectricity.objects.filter(pk=pk).values("deduction_amount")
+        # print(deduction_amount_db)
+        if deduction_amount_db[0].get("deduction_amount"):
+            return_data = {"message": "已经交过费了不允许重复扣费"}
+            return Response(return_data)
+        instance = self.get_object()
+        # print(request.data)
+        serializer = self.get_serializer(instance, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        # 获取前端传递的参数
+        deduction_amount = serializer.validated_data.get("deduction_amount")
+        # print(deduction_amount)
+        # 修改表中的数据
+        instance.deduction_amount = deduction_amount
+        instance.payment_status = 1
+        instance.save()
+        # 更新人员表的余额
+        instance.room.WaterElectricity_Balance -= deduction_amount
+        instance.room.save()
+        return Response(serializer.data)

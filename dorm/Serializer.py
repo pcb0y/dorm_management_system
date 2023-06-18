@@ -70,6 +70,7 @@ class RoomSerializers(serializers.ModelSerializer):
     # category_names = RoomCategorySerializers(many=True, read_only=True)
     # room_category_name = serializers.CharField(source="room_category.Room_Category_name")
     # room_type_name = serializers.CharField(source="room_type.type_name")
+    people = PeopleSerializers(many=True)
 
     class Meta:
         model = Room
@@ -106,6 +107,7 @@ class RepairReportSerializers(serializers.ModelSerializer):
 class WaterElectricitySerializers(serializers.ModelSerializer):
     """水电管理序列化器"""
     room_id = serializers.IntegerField(label="房间号ID")
+    WaterElectricity_Balance = serializers.CharField(read_only=True, source="room.WaterElectricity_Balance")
 
     class Meta:
         model = WaterElectricity
@@ -171,4 +173,20 @@ class DeductionSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = RentDetails
+        fields = ["deduction_amount"]
+
+
+class PaymentWaterElectricitySerializers(serializers.ModelSerializer):
+    """水电费充值序列化器"""
+
+    class Meta:
+        model = PaymentWaterElectricity
+        fields = "__all__"
+
+
+class DeductionWaterElectricitySerializers(serializers.ModelSerializer):
+    """扣款水电费序列化器"""
+
+    class Meta:
+        model = WaterElectricity
         fields = ["deduction_amount"]
