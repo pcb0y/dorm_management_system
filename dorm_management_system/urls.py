@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,re_path
 from dorm import views
 from rest_framework.routers import DefaultRouter # 导入路由器定义的包
 
@@ -24,6 +24,9 @@ urlpatterns = [
     # path('token/', views.TokenView.as_view()),
     path('login/', views.LoginView.as_view()),
     path('AddRentDetails/', views.AddRentDetailsView.as_view()),
+    path('Count/', views.CountView.as_view()),
+    path('updateRoomPeople/', views.UpdateRoomPeopleView.as_view()),
+
 
 
 
@@ -53,6 +56,7 @@ router.register(r'PaymentWaterElectricity', views.PaymentWaterElectricityView,
                 basename='PaymentWaterElectricity')  # 水电费充值
 router.register(r'DeductionWaterElectricity', views.DeductionWaterElectricityView,
                 basename='DeductionWaterElectricity')  # 扣水电费
+
 
 # router.register(r'peoples', views.PeoplesView, basename='peoples')  # 向路由器中注册视图集，并起别名
 urlpatterns += router.urls  # 将路由器中的所有路由信息追加到Django的路由列表（urlpatterns）中

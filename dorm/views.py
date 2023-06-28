@@ -6,6 +6,9 @@ from datetime import date
 from dateutil.relativedelta import relativedelta
 import calendar
 from decimal import Decimal
+
+from django.http import JsonResponse
+from django.db.models import Count, Sum, Max, Min, Avg
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import User
@@ -22,6 +25,15 @@ from .models import User
 import datetime
 from .jwt_create_token import create_token
 from .jwt_authenticate import JWTQueryParamsAuthentication
+from rest_framework.pagination import PageNumberPagination
+
+# Create your views here.
+
+
+# 定义分页类
+class MyPageNumberPagination(PageNumberPagination):
+    # 分页数量
+    page_size = 20
 
 
 class LoginView(APIView):
@@ -115,6 +127,15 @@ class RoomView(ModelViewSet):
     """ 房屋管理视图"""
     queryset = models.Room.objects.all()
     # serializer_class = RoomSerializers
+    pagination_class = MyPageNumberPagination
+
+    # 进行条件查询
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        room_number = self.request.query_params.get('room_number')
+        if room_number:
+            queryset = queryset.filter(room_number=room_number)
+        return queryset
     # 根据不同的请求走不同的序列化器
 
     def get_serializer_class(self):
@@ -128,12 +149,46 @@ class PeopleView(ModelViewSet):
     """人员管理视图"""
     queryset = models.People.objects.all()
     serializer_class = PeopleSerializers
+    pagination_class = MyPageNumberPagination
+
+    # 进行条件查询
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        name = self.request.query_params.get('name')
+        if name:
+            queryset = queryset.filter(name__icontains=name)
+        return queryset
+
+    # 重写perform_create方法更新房间信息入住人数字段
+    def perform_create(self, serializer):
+        instance = serializer.save()
+        # 获取房间的实例
+        related_instance = instance.room
+        # related_instance.number_of_people = related_instance.standard_number_of_people-1
+        # 获取房间的ID
+        room_id = related_instance.id
+        # 查找房间住的人数
+        room_in_people = models.People.objects.filter(room_id=room_id).count()
+        print(room_in_people)
+        # 更新房间表人数
+        related_instance.number_of_people = room_in_people
+        related_instance.empty_bed_number = related_instance.standard_number_of_people-room_in_people
+        related_instance.save()
 
 
 class WaterElectricityView(ModelViewSet):
     """水电管理视图"""
     queryset = models.WaterElectricity.objects.all()
     serializer_class = WaterElectricitySerializers
+    pagination_class = MyPageNumberPagination
+
+    # 进行条件查询
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        room_number = self.request.query_params.get('room_number')
+        if room_number:
+            queryset = queryset.filter(room__room_number=room_number)
+        return queryset
 
 
 class RentDetailsView(ModelViewSet):
@@ -141,6 +196,7 @@ class RentDetailsView(ModelViewSet):
 
     queryset = models.RentDetails.objects.all()
     serializer_class = RentDetailsSerializers
+    pagination_class = MyPageNumberPagination
     # sql = queryset.query.__str__()
     # print(sql)
 
@@ -149,12 +205,14 @@ class RepairReportView(ModelViewSet):
     """维修管理视图"""
     queryset = models.RepairReport.objects.all()
     serializer_class = RepairReportSerializers
+    pagination_class = MyPageNumberPagination
 
 
 class DeviceDetailView(ModelViewSet):
     """设备管理视图"""
     queryset = models.DeviceDetail.objects.all()
     serializer_class = DeviceDetailSerializers
+    pagination_class = MyPageNumberPagination
 
 
 class BuildNameView(ModelViewSet):
@@ -259,7 +317,7 @@ class AddRentDetailsView(APIView):
                 )
             )
         models.RentDetails.objects.bulk_create(device_obj_list)
-        return HttpResponse("kkk")
+        return HttpResponse("生成租金帐单明细成功")
 
 
 class PaymentView(ModelViewSet):
@@ -359,3 +417,45 @@ class DeductionWaterElectricityView(ModelViewSet):
         instance.room.WaterElectricity_Balance -= deduction_amount
         instance.room.save()
         return Response(serializer.data)
+
+
+class CountView(APIView):
+    """统计视图"""
+    def get(self,request):
+        data = {}
+        # 统计总房间数
+        room_count = models.Room.objects.aggregate(room_count=Count('id'))
+        # 统计已入住人数
+        people_sum = models.People.objects.aggregate(people_sum=Count('id'))
+
+        # 统计可住人数
+
+        room_total_people = models.Room.objects.aggregate(room_total_people=Sum('standard_number_of_people'))
+
+        # 统计空房间数
+        empty_room = models.Room.objects.filter(people__room_id=None).count()
+
+        # 统计空床数
+        empty_bed_number = models.Room.objects.aggregate(empty_bed_number=Sum('empty_bed_number'))
+        data.update(**room_count, **people_sum, **room_total_people, **empty_bed_number)
+        data["empty_room"] = empty_room
+
+        # print(data)
+        return JsonResponse(data, safe=False)
+        # return HttpResponse(data)
+
+
+class UpdateRoomPeopleView(APIView):
+    """更新房间表人数"""
+    def get(self,request):
+        room_id = models.Room.objects.all().values("id", "standard_number_of_people")
+        # print(room_id.id)
+        for i in room_id:
+            # print(i["id"])
+            room_in_people = models.People.objects.filter(room_id=i["id"]).count()
+            models.Room.objects.filter(id=i["id"]).update(number_of_people=room_in_people,
+                                                          empty_bed_number=i["standard_number_of_people"]-room_in_people)
+            # print(room_in_people)
+        return HttpResponse("ok")
+
+

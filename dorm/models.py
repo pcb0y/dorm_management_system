@@ -293,16 +293,16 @@ class RentDetails(models.Model):
 
     year_month = models.CharField(max_length=100, null=True, blank=True, verbose_name="年月数")
     # 应缴金额
-    payable_amount = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="应缴金额")
+    payable_amount = models.DecimalField(default=0, max_digits=20, decimal_places=2, verbose_name="应缴金额")
 
     # 扣款金额
-    deduction_amount = models.DecimalField(default=None, max_digits=20, decimal_places=2, verbose_name="扣款金额")
+    deduction_amount = models.DecimalField(default=0, max_digits=20, decimal_places=2, verbose_name="扣款金额")
 
     # 扣款时间
     deduction_time = models.DateTimeField(auto_now_add=True, verbose_name="扣款时间")
     # 修改时间
     modified_time = models.DateTimeField(auto_now=True, verbose_name="修改时间")
-    payment_user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name="payment_user", verbose_name="扣费人")
+    payment_user = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True, related_name="payment_user", verbose_name="扣费人")
     create_user = models.ForeignKey(to=User, on_delete=models.CASCADE, verbose_name="创建人")
     status = (
         (1, "已缴费"),
@@ -327,27 +327,27 @@ class RepairReport(models.Model):
     维修明细表
     """
     # 关联报修人表
-    people = models.ForeignKey(to=People, null=True, on_delete=models.SET_NULL, verbose_name="报修人")
+    people = models.ForeignKey(to=People, on_delete=models.CASCADE, verbose_name="报修人")
     # 关联房屋表
-    room = models.ForeignKey(to=Room, null=True, on_delete=models.SET_NULL, verbose_name="房间号")
+    room = models.ForeignKey(to=Room,  on_delete=models.CASCADE, verbose_name="房间号")
     # 报修日期
     repair_time = models.DateTimeField(verbose_name="报修日期")
     # 关联报修设备表
-    repair_device = models.ForeignKey(to=DeviceList, null=True,  on_delete=models.SET_NULL, verbose_name="维修设备")
+    repair_device = models.ForeignKey(to=DeviceList,   on_delete=models.CASCADE, verbose_name="维修设备")
     # 故障说明
     fault_description = models.CharField(max_length=50, null=True, verbose_name="故障说明")
     # 是否保质期内
-    is_quality_guarantee_period = models.BooleanField(null=True,verbose_name="是否保质期内")
+    is_quality_guarantee_period = models.BooleanField(null=True, verbose_name="是否保质期内")
     # 维修费用
-    repair_cost = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="维修费用")
+    repair_cost = models.DecimalField(max_digits=20, decimal_places=2, null=True, blank=True, verbose_name="维修费用")
     # 是否自费
     is_self_cost = models.BooleanField(null=True, verbose_name="是否自费")
     # 维修人
-    repair_people = models.CharField(max_length=10, null=True, verbose_name="维修人")
+    repair_people = models.CharField(max_length=10, null=True, blank=True, verbose_name="维修人")
     # 是否修好
     is_repaired = models.BooleanField(default=False, verbose_name="是否修好")
     # 修复日期
-    repair_date = models.DateField(verbose_name='修复日期')
+    repair_date = models.DateField(null=True, blank=True, verbose_name='修复日期')
     # 备注
     remark = models.CharField(max_length=100, null=True, blank=True, verbose_name="备注")
 

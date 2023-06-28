@@ -144,7 +144,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # 配置MySQL
 
-pymysql.install_as_MySQLdb()
+# pymysql.install_as_MySQLdb()
 DATABASES = {
     # 'default': {
     #     'ENGINE': 'django.db.backends.mysql',   # 数据库引擎
@@ -165,11 +165,15 @@ DATABASES = {
 }
 
 
+
 REST_FRAMEWORK = {
      # 时间格式配置
+
     'DATETIME_FORMAT': "%Y-%m-%d %H:%M:%S",  # 日期时间格式配置
     'DATE_FORMAT': "%Y-%m-%d",
     # 'DEFAULT_AUTHENTICATION_CLASSES': ['dorm.jwt_authenticate.JWTQueryParamsAuthentication', ],  # JWT 认证注册
+    'DEFAULT_PAGINATION_CLASS':  'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': None  # 每页数目
 
 }
 APPEND_SLASH = False
@@ -180,3 +184,23 @@ APPEND_SLASH = False
 # )
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# 操作ORM时如何查看内部sql语句
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console':{
+            'level':'DEBUG',
+            'class':'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.db.backends': {
+            'handlers': ['console'],
+            'propagate': True,
+            'level':'DEBUG',
+        },
+    }
+}
+

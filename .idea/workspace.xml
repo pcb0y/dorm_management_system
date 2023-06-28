@@ -2,14 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0927826d-5ab3-4f74-badb-7f7591287ab4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/dorm/migrations/0015_alter_people_room.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dorm/migrations/0016_paymentwaterelectricity.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dorm/migrations/0017_room_waterelectricity_balance.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dorm/migrations/0018_auto_20230617_1620.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dorm/migrations/0019_waterelectricity_electricity_payment_user.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/base/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/base/dingtshi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dorm/migrations/0020_auto_20230618_1112.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dorm/migrations/0021_alter_repairreport_room.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dorm/migrations/0022_auto_20230618_1124.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dorm/migrations/0023_auto_20230618_1125.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dorm/migrations/0024_alter_repairreport_people.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dorm/migrations/0025_alter_repairreport_repair_device.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dorm/migrations/0026_auto_20230619_1038.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dorm/migrations/0027_auto_20230620_1331.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dorm/Serializer.py" beforeDir="false" afterPath="$PROJECT_DIR$/dorm/Serializer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dorm/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/dorm/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dorm/test1.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/dorm/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/dorm/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dorm_management_system/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/dorm_management_system/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dorm_management_system/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/dorm_management_system/urls.py" afterDir="false" />
@@ -24,6 +30,7 @@
     <SUITE FILE_PATH="coverage/dorm_management_system$tests.coverage" NAME="tests Coverage Results" MODIFIED="1685687865336" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dorm" />
     <SUITE FILE_PATH="coverage/dorm_management_system$admin.coverage" NAME="admin Coverage Results" MODIFIED="1685179847806" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dorm" />
     <SUITE FILE_PATH="coverage/dorm_management_system$views.coverage" NAME="views Coverage Results" MODIFIED="1684738518964" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dorm" />
+    <SUITE FILE_PATH="coverage/dorm_management_system$dingtshi.coverage" NAME="dingtshi Coverage Results" MODIFIED="1687141438170" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/base" />
     <SUITE FILE_PATH="coverage/dorm_management_system$test1.coverage" NAME="test1 Coverage Results" MODIFIED="1686098424490" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dorm" />
   </component>
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
@@ -34,8 +41,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dorm_management_system/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="466">
-              <caret line="180" lean-forward="true" selection-start-line="180" selection-end-line="180" />
+            <state relative-caret-position="1154">
+              <caret line="204" column="1" lean-forward="true" selection-start-line="204" selection-start-column="1" selection-end-line="204" selection-end-column="1" />
               <folding>
                 <element signature="e#323#332#0" expanded="true" />
               </folding>
@@ -44,13 +51,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dorm/test1.py">
+        <entry file="file://$PROJECT_DIR$/manage.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="133">
-              <caret line="7" selection-start-line="7" selection-end-line="7" />
-              <folding>
-                <element signature="e#0#15#0" expanded="true" />
-              </folding>
+              <caret line="8" column="73" selection-start-line="8" selection-start-column="53" selection-end-line="8" selection-end-column="75" />
             </state>
           </provider>
         </entry>
@@ -58,8 +62,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dorm/Serializer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="181">
-              <caret line="109" column="28" selection-start-line="109" selection-start-column="4" selection-end-line="109" selection-end-column="28" />
+            <state relative-caret-position="2199">
+              <caret line="152" column="26" selection-start-line="152" selection-start-column="26" selection-end-line="152" selection-end-column="26" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -70,8 +74,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dorm_management_system/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="402">
-              <caret line="53" column="43" selection-start-line="53" selection-start-column="18" selection-end-line="53" selection-end-column="43" />
+            <state relative-caret-position="223">
+              <caret line="38" column="24" selection-start-line="38" selection-start-column="18" selection-end-line="38" selection-end-column="24" />
               <folding>
                 <element signature="e#646#678#0" expanded="true" />
               </folding>
@@ -82,10 +86,24 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dorm/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="67">
-              <caret line="332" column="35" selection-start-line="332" selection-start-column="6" selection-end-line="332" selection-end-column="35" />
+            <state relative-caret-position="394">
+              <caret line="189" column="69" lean-forward="true" selection-start-line="189" selection-start-column="69" selection-end-line="189" selection-end-column="69" />
               <folding>
                 <element signature="e#0#48#0" expanded="true" />
+                <element signature="e#4901#5001#0" />
+                <element signature="e#5039#5131#0" />
+                <element signature="e#5172#5272#0" />
+                <element signature="e#5317#5425#0" />
+                <element signature="e#5763#5865#0" />
+                <element signature="e#5612#5712#0" />
+                <element signature="e#5755#5852#0" />
+                <element signature="e#5889#5979#0" />
+                <element signature="e#6022#6126#0" />
+                <element signature="e#6168#7918#0" />
+                <element signature="e#7958#8481#0" />
+                <element signature="e#8544#9619#0" />
+                <element signature="e#9675#10256#0" />
+                <element signature="e#10316#11391#0" />
               </folding>
             </state>
           </provider>
@@ -94,8 +112,18 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dorm/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="409">
-              <caret line="137" column="28" selection-start-line="137" selection-start-column="4" selection-end-line="137" selection-end-column="28" />
+            <state relative-caret-position="364">
+              <caret line="96" lean-forward="true" selection-start-line="96" selection-end-line="96" />
+              <folding>
+                <element signature="e#435#652#0" />
+                <element signature="e#693#946#0" />
+                <element signature="e#1383#1661#0" />
+                <element signature="e#2186#2438#0" />
+                <element signature="e#3570#3593#0" />
+                <element signature="e#3723#3981#0" />
+                <element signature="e#4019#4235#0" />
+                <element signature="e#6096#7946#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -103,7 +131,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dorm/admin.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
+            <state relative-caret-position="380">
               <caret line="20" column="30" selection-start-line="20" selection-start-column="30" selection-end-line="20" selection-end-column="30" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
@@ -140,8 +168,19 @@
       <find>RentDetailsSerializers</find>
       <find>deduction_amount</find>
       <find>relativedelta</find>
-      <find>print</find>
       <find>RentDetails</find>
+      <find>print</find>
+      <find>RepairReport</find>
+      <find>peo</find>
+      <find>DeviceList</find>
+      <find>report</find>
+      <find>rep</find>
+      <find>re</find>
+      <find>ConfDict</find>
+      <find>static</find>
+      <find>payment_user</find>
+      <find>devicelist</find>
+      <find>AddRentDetailsView</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -158,23 +197,24 @@
         <option value="$USER_HOME$/AppData/Local/Programs/Python/Python38/Lib/site-packages/pipreqs/pipreqs.py" />
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/dorm/tests.py" />
-        <option value="$PROJECT_DIR$/dorm/test1.py" />
         <option value="$PROJECT_DIR$/dorm/migrations/0002_auto_20230608_0818.py" />
         <option value="$PROJECT_DIR$/dorm/migrations/__init__.py" />
         <option value="$PROJECT_DIR$/dorm/migrations/0004_remove_people_balance.py" />
         <option value="$PROJECT_DIR$/dorm/migrations/0007_rentdetails_payment_status.py" />
         <option value="$PROJECT_DIR$/dorm/admin.py" />
+        <option value="$PROJECT_DIR$/dorm/Serializer.py" />
+        <option value="$PROJECT_DIR$/dorm/test1.py" />
+        <option value="$PROJECT_DIR$/base/dingtshi.py" />
+        <option value="$PROJECT_DIR$/dorm_management_system/settings.py" />
+        <option value="$PROJECT_DIR$/dorm_management_system/urls.py" />
         <option value="$PROJECT_DIR$/dorm/models.py" />
         <option value="$PROJECT_DIR$/dorm/views.py" />
-        <option value="$PROJECT_DIR$/dorm_management_system/urls.py" />
-        <option value="$PROJECT_DIR$/dorm/Serializer.py" />
-        <option value="$PROJECT_DIR$/dorm_management_system/settings.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
+    <option name="x" value="-7" />
+    <option name="y" value="20" />
     <option name="width" value="1936" />
     <option name="height" value="1048" />
   </component>
@@ -192,6 +232,16 @@
               <item name="dorm_management_system" type="b2602c69:ProjectViewProjectNode" />
               <item name="dorm_management_system" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="dorm_management_system" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dorm_management_system" type="462c0819:PsiDirectoryNode" />
+              <item name="base" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dorm_management_system" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dorm_management_system" type="462c0819:PsiDirectoryNode" />
+              <item name="dorm" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -200,7 +250,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../barcodefindpdf" />
+    <property name="last_opened_file_path" value="E:/python源码/srm" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="restartRequiresConfirmation" value="false" />
@@ -208,6 +258,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\python源码\dorm_management_system" />
+      <recent name="D:\python源码\dorm_management_system\dorm\base" />
       <recent name="D:\python源码\dorm_management_system\dorm" />
     </key>
   </component>
@@ -246,6 +298,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="dingtshi" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="dorm_management_system" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/base" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/base/dingtshi.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="test1" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="dorm_management_system" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -259,7 +333,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dorm/test1.py" />
+      <option name="SCRIPT_NAME" value="D:\python源码\dorm_management_system\dorm\base\test1.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -338,6 +412,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.dingtshi" />
         <item itemvalue="Python.test1" />
         <item itemvalue="Python.tests" />
         <item itemvalue="Python.admin" />
@@ -357,12 +432,12 @@
       <updated>1684720706099</updated>
       <workItem from="1684720707270" duration="119974000" />
       <workItem from="1685686876839" duration="81447000" />
-      <workItem from="1686911453251" duration="17525000" />
+      <workItem from="1686911453251" duration="69064000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="218946000" />
+    <option name="totallyTimeSpent" value="270485000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -382,7 +457,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.24726477" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49573562" visible="true" weight="0.38730854" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39934355" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -390,10 +465,10 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32932165" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32603937" />
-      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32932165" />
-      <window_info active="true" anchor="bottom" id="manage.py@dorm_management_system" order="13" visible="true" weight="0.32932165" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5042644" side_tool="true" weight="0.38730854" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49626866" weight="0.32603937" />
+      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.4989339" weight="0.32932165" />
+      <window_info anchor="bottom" id="manage.py@dorm_management_system" order="13" sideWeight="0.49626866" weight="0.32932165" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -479,13 +554,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/manage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="7" column="35" lean-forward="true" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dorm/apps.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="57">
@@ -558,13 +626,6 @@
     <entry file="file://$PROJECT_DIR$/dorm/migrations/0003_auto_20230530_0952.py" />
     <entry file="file://$PROJECT_DIR$/dorm/migrations/0002_auto_20230608_0808.py" />
     <entry file="file://$PROJECT_DIR$/dorm/migrations/0002_auto_20230608_0818.py" />
-    <entry file="file://$PROJECT_DIR$/dorm/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="1" column="28" selection-start-line="1" selection-start-column="28" selection-end-line="1" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dorm/migrations/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -609,9 +670,36 @@
         <state relative-caret-position="-16" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../定时发送短信/定时发送短信.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1387">
+          <caret line="100" column="22" selection-start-line="39" selection-end-line="100" selection-end-column="22" />
+          <folding>
+            <element signature="e#1#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/base/dingtshi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="19" column="34" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dorm/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" column="28" selection-start-line="1" selection-start-column="28" selection-end-line="1" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/dorm/admin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
+        <state relative-caret-position="380">
           <caret line="20" column="30" selection-start-line="20" selection-start-column="30" selection-end-line="20" selection-end-column="30" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
@@ -619,57 +707,78 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dorm/test1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dorm/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="67">
-          <caret line="332" column="35" selection-start-line="332" selection-start-column="6" selection-end-line="332" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#48#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dorm_management_system/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="53" column="43" selection-start-line="53" selection-start-column="18" selection-end-line="53" selection-end-column="43" />
-          <folding>
-            <element signature="e#646#678#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dorm/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
-          <caret line="137" column="28" selection-start-line="137" selection-start-column="4" selection-end-line="137" selection-end-column="28" />
+        <state relative-caret-position="364">
+          <caret line="96" lean-forward="true" selection-start-line="96" selection-end-line="96" />
+          <folding>
+            <element signature="e#435#652#0" />
+            <element signature="e#693#946#0" />
+            <element signature="e#1383#1661#0" />
+            <element signature="e#2186#2438#0" />
+            <element signature="e#3570#3593#0" />
+            <element signature="e#3723#3981#0" />
+            <element signature="e#4019#4235#0" />
+            <element signature="e#6096#7946#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dorm/Serializer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="109" column="28" selection-start-line="109" selection-start-column="4" selection-end-line="109" selection-end-column="28" />
+        <state relative-caret-position="2199">
+          <caret line="152" column="26" selection-start-line="152" selection-start-column="26" selection-end-line="152" selection-end-column="26" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/manage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="8" column="73" selection-start-line="8" selection-start-column="53" selection-end-line="8" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dorm_management_system/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="38" column="24" selection-start-line="38" selection-start-column="18" selection-end-line="38" selection-end-column="24" />
+          <folding>
+            <element signature="e#646#678#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dorm/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="394">
+          <caret line="189" column="69" lean-forward="true" selection-start-line="189" selection-start-column="69" selection-end-line="189" selection-end-column="69" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
+            <element signature="e#4901#5001#0" />
+            <element signature="e#5039#5131#0" />
+            <element signature="e#5172#5272#0" />
+            <element signature="e#5317#5425#0" />
+            <element signature="e#5763#5865#0" />
+            <element signature="e#5612#5712#0" />
+            <element signature="e#5755#5852#0" />
+            <element signature="e#5889#5979#0" />
+            <element signature="e#6022#6126#0" />
+            <element signature="e#6168#7918#0" />
+            <element signature="e#7958#8481#0" />
+            <element signature="e#8544#9619#0" />
+            <element signature="e#9675#10256#0" />
+            <element signature="e#10316#11391#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/dorm_management_system/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="466">
-          <caret line="180" lean-forward="true" selection-start-line="180" selection-end-line="180" />
+        <state relative-caret-position="1154">
+          <caret line="204" column="1" lean-forward="true" selection-start-line="204" selection-start-column="1" selection-end-line="204" selection-end-column="1" />
           <folding>
             <element signature="e#323#332#0" expanded="true" />
           </folding>

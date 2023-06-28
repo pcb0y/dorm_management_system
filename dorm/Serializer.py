@@ -97,11 +97,14 @@ class RepairReportSerializers(serializers.ModelSerializer):
     """维修管理序列化器"""
     # room_people = serializers.CharField(source="people.name")
     # repair_device_name = serializers.CharField(source="repair_device.device_name")
-    # room_number = serializers.CharField(source="")
+    room_number = serializers.CharField(read_only=True, source="room.room_number")
+    name = serializers.CharField(read_only=True, source="people.name")
+    device_name = serializers.CharField(read_only=True, source="repair_device.device_name")
+
     class Meta:
         model = RepairReport
         fields = "__all__"
-        depth = 1
+        # depth = 1
 
 
 class WaterElectricitySerializers(serializers.ModelSerializer):
@@ -152,12 +155,12 @@ class RoomTypeSerializers(serializers.ModelSerializer):
 
 class DeviceListSerializers(serializers.ModelSerializer):
     """设备清单序列化器"""
-    value = serializers.IntegerField(source='id')
-    text = serializers.CharField(source='device_name')
+    value = serializers.IntegerField(read_only=True, source='id')
+    text = serializers.CharField(read_only=True, source='device_name')
 
     class Meta:
         model = DeviceList
-        fields = ["value", "text"]
+        fields = "__all__"
 
 
 class PaymentSerializers(serializers.ModelSerializer):
