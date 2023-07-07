@@ -21,7 +21,7 @@ from rest_framework.routers import DefaultRouter # 导入路由器定义的包
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('token/', views.TokenView.as_view()),
+    path('token/', views.TokenView.as_view()),
     path('login/', views.LoginView.as_view()),
     path('AddRentDetails/', views.AddRentDetailsView.as_view()),
     path('Count/', views.CountView.as_view()),
@@ -52,6 +52,7 @@ router.register(r'RoomNumber', views.RoomNumberView, basename='RoomNumber')  # �
 router.register(r'DeviceList', views.DeviceListView, basename='DeviceList')  # 设备清单
 router.register(r'Payment', views.PaymentView, basename='Payment')  # 付款
 router.register(r'Deduction', views.DeductionView, basename='Deduction')  # 扣款
+router.register(r'PeopleName', views.PeopleNameView, basename='PeopleName')  # 用户姓名
 router.register(r'PaymentWaterElectricity', views.PaymentWaterElectricityView,
                 basename='PaymentWaterElectricity')  # 水电费充值
 router.register(r'DeductionWaterElectricity', views.DeductionWaterElectricityView,

@@ -57,6 +57,14 @@ class PeopleSerializers(serializers.ModelSerializer):
         # depth = 1
 
 
+class PeopleNameSerializers(serializers.ModelSerializer):
+    """人员姓名序列化器"""
+
+    class Meta:
+        model = People
+        fields = ["id", "name"]
+        # depth = 1
+
 class RoomsSerializers(serializers.ModelSerializer):
     class Meta:
         model = Room

@@ -50,6 +50,11 @@ INSTALLED_APPS = [
 
     # 解决跨域访问问题
     'corsheaders',
+    # https模块
+    # 'sslserver',
+    # 'werkzeug_debugger_runserver',
+    # 'django_extensions'
+
 ]
 
 MIDDLEWARE = [
@@ -171,7 +176,7 @@ REST_FRAMEWORK = {
 
     'DATETIME_FORMAT': "%Y-%m-%d %H:%M:%S",  # 日期时间格式配置
     'DATE_FORMAT': "%Y-%m-%d",
-    # 'DEFAULT_AUTHENTICATION_CLASSES': ['dorm.jwt_authenticate.JWTQueryParamsAuthentication', ],  # JWT 认证注册
+    'DEFAULT_AUTHENTICATION_CLASSES': ['dorm.jwt_authenticate.JWTQueryParamsAuthentication', ],  # JWT 认证注册
     'DEFAULT_PAGINATION_CLASS':  'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': None  # 每页数目
 
@@ -186,21 +191,39 @@ APPEND_SLASH = False
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # 操作ORM时如何查看内部sql语句
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console':{
-            'level':'DEBUG',
-            'class':'logging.StreamHandler',
-        },
-    },
-    'loggers': {
-        'django.db.backends': {
-            'handlers': ['console'],
-            'propagate': True,
-            'level':'DEBUG',
-        },
-    }
-}
-
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'console':{
+#             'level':'DEBUG',
+#             'class':'logging.StreamHandler',
+#         },
+#     },
+#     'loggers': {
+#         'django.db.backends': {
+#             'handlers': ['console'],
+#             'propagate': True,
+#             'level':'DEBUG',
+#         },
+#     }
+# }
+#
+# # 设置HTTPS证书和密钥的文件路径
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# CERTIFICATE_DIR = os.path.join(BASE_DIR, 'certificates')
+# CERTIFICATE_FILE = os.path.join(CERTIFICATE_DIR, 'certificate.crt')
+# PRIVATE_KEY_FILE = os.path.join(CERTIFICATE_DIR, 'private.key')
+#
+# # 配置HTTPS设置
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+# SECURE_SSL_REDIRECT = True
+# SECURE_HSTS_SECONDS = 3600
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# SECURE_HSTS_PRELOAD = True
+#
+# # 如果想要使用自定义的SSL证书和密钥，可以使用以下设置
+# SECURE_SSL_CERT = 'certificate.crt'
+# SECURE_SSL_KEY = 'private.key'

@@ -66,60 +66,63 @@ class IndexView(APIView):
         return Response("可以了")
 
 
-# class TokenView(APIView):
-#
-#     def post(self,request,*args,**kwargs):
-#         """用户登陆"""
-#         user = request.data.get("username")
-#         print(user)
-#         pwd = request.data.get("password")
-#         user_obj = User.objects.filter(user_name=user, password=pwd).first()
-#         if not user_obj:
-#             return Response({"code": 401, "error": "用户名或密码错误"})
-#         salt = settings.SECRET_KEY
-#         # 构造Header，默认如下
-#         headers = {
-#             'typ': 'jwt',
-#             'alg': 'HS256'
-#         }
-#         # 构造Payload
-#         payload = {
-#             "user_id": user_obj.pk,  # 自定义用户ID
-#             "username": user_obj.user_name,  # 自定义用户名
-#             "exp": datetime.datetime.utcnow()+datetime.timedelta(minutes=5)
-#         }
-#         jwt_token = jwt.encode(headers=headers, payload=payload, key=salt, algorithm="HS256")
-#         return Response({'code': 200, 'token': jwt_token})
-#
-#
-# class LoginView(APIView):
-#
-#     def get(self, request, *args, **kwargs):
-#         token = request.query_params.get("token")
-#         salt = settings.SECRET_KEY
-#         print(token, salt)
-#         payload=None
-#         error = ""
-#         try:
-#             # 从token中获取payload【不校验合法性】
-#             # unverified_payload = jwt.decode(token, None, False)
-#             # print(unverified_payload)
-#             # 从token中获取payload【校验合法性】
-#             payload = jwt.decode(token, salt, verify=True, algorithms="HS256")
-#             print(payload)
-#             return Response(f"已登录成功，欢迎！")
-#         except exceptions.ExpiredSignatureError:
-#             error = "token已失效"
-#             return Response({"code": 401, "error": error})
-#         except jwt.DecodeError:
-#             error = "token认证失败"
-#             print(payload)
-#             return Response({"code": 401, "error": error})
-#         except jwt.InvalidTokenError:
-#             error = "非法token"
-#             return Response({"code": 401, "error": error})
-#         if not payload:
-#             return Response({"code": 1003})
+class TokenView(APIView):
+    authentication_classes = []  # 取消全局认证
+
+    def post(self,request,*args,**kwargs):
+        """用户登陆"""
+        print(request.data)
+        user = request.data.get("username")
+        # print(user)
+        pwd = request.data.get("password")
+        user_obj = User.objects.filter(user_name=user, password=pwd).first()
+        if not user_obj:
+            return Response({"code": 401, "error": "用户名或密码错误"})
+        salt = settings.SECRET_KEY
+        # 构造Header，默认如下
+        headers = {
+            'typ': 'jwt',
+            'alg': 'HS256'
+        }
+        # 构造Payload
+        payload = {
+            "user_id": user_obj.pk,  # 自定义用户ID
+            "username": user_obj.user_name,  # 自定义用户名
+            "exp": datetime.datetime.utcnow()+datetime.timedelta(minutes=60*24)
+        }
+
+        jwt_token = jwt.encode(headers=headers, payload=payload, key=salt, algorithm="HS256")
+        return Response({'code': 200, 'token': jwt_token, 'username': user_obj.user_name})
+
+
+class LoginView(APIView):
+
+    def get(self, request, *args, **kwargs):
+        token = request.query_params.get("token")
+        salt = settings.SECRET_KEY
+        print(token, salt)
+        payload=None
+        error = ""
+        try:
+            # 从token中获取payload【不校验合法性】
+            # unverified_payload = jwt.decode(token, None, False)
+            # print(unverified_payload)
+            # 从token中获取payload【校验合法性】
+            payload = jwt.decode(token, salt, verify=True, algorithms="HS256")
+            print(payload)
+            return Response(f"已登录成功，欢迎！")
+        except exceptions.ExpiredSignatureError:
+            error = "token已失效"
+            return Response({"code": 401, "error": error})
+        except jwt.DecodeError:
+            error = "token认证失败"
+            print(payload)
+            return Response({"code": 401, "error": error})
+        except jwt.InvalidTokenError:
+            error = "非法token"
+            return Response({"code": 401, "error": error})
+        if not payload:
+            return Response({"code": 1003})
 
 
 class RoomView(ModelViewSet):
@@ -255,6 +258,12 @@ class RoomNumberView(ModelViewSet):
     """房间号视图"""
     queryset = models.Room.objects.all()
     serializer_class = RoomNumberSerializers
+
+
+class PeopleNameView(ModelViewSet):
+    """人员姓名视图"""
+    queryset = models.People.objects.all()
+    serializer_class = PeopleNameSerializers
 
 
 class UserView(ModelViewSet):
