@@ -81,11 +81,11 @@ class User(models.Model):
     # 用户名
     user_name = models.CharField(max_length=20, verbose_name="用户名")
     # 密码
-    password = models.CharField(max_length=20, verbose_name="密码")
+    password = models.CharField(max_length=100, verbose_name="密码")
     # 权限
-    power = models.SmallIntegerField(verbose_name="权限")
+    power = models.SmallIntegerField(verbose_name="权限", null=True)
     # 创建时间
-    create_time = models.DateTimeField(verbose_name="创建时间")
+    create_time = models.DateTimeField(verbose_name="创建时间", auto_now_add=True)
 
     def __str__(self):
         return self.user_name

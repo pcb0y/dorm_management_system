@@ -6,7 +6,7 @@ from datetime import date
 from dateutil.relativedelta import relativedelta
 import calendar
 from decimal import Decimal
-
+from django.contrib.auth.hashers import make_password,check_password
 from django.http import JsonResponse
 from django.db.models import Count, Sum, Max, Min, Avg
 from rest_framework.views import APIView
@@ -43,9 +43,11 @@ class LoginView(APIView):
     def post(self, request, *args, **kwargs):
         user = request.data.get('username')
         pwd = request.data.get('password')
-        user_obj = User.objects.filter(user_name=user, password=pwd).first()
+        user_obj = User.objects.filter(user_name=user).first()
+        print(user_obj)
         if not user_obj:
             return Response({'code': 401, 'error': '用户名或密码错误'})
+
         payload = {
             'user_id': user_obj.pk,  # 自定义用户ID
             'username': user_obj.user_name,  # 自定义用户名
@@ -71,12 +73,19 @@ class TokenView(APIView):
 
     def post(self,request,*args,**kwargs):
         """用户登陆"""
-        print(request.data)
+        # print(request.data)
         user = request.data.get("username")
         # print(user)
-        pwd = request.data.get("password")
-        user_obj = User.objects.filter(user_name=user, password=pwd).first()
-        if not user_obj:
+        # 用户输入的密码
+        input_pwd = request.data.get("password")
+
+        # 加密过存到数据库的密码
+        hashed_password = User.objects.filter(user_name=user).values("password")[0]["password"]
+        # 匹配密码
+
+        password_matched = check_password(input_pwd, hashed_password)
+        # print("密码匹配",password_matched,type(input_pwd),hashed_password)
+        if not password_matched:
             return Response({"code": 401, "error": "用户名或密码错误"})
         salt = settings.SECRET_KEY
         # 构造Header，默认如下
@@ -86,13 +95,13 @@ class TokenView(APIView):
         }
         # 构造Payload
         payload = {
-            "user_id": user_obj.pk,  # 自定义用户ID
-            "username": user_obj.user_name,  # 自定义用户名
+
+            "username": user,  # 自定义用户名
             "exp": datetime.datetime.utcnow()+datetime.timedelta(minutes=60*24)
         }
 
         jwt_token = jwt.encode(headers=headers, payload=payload, key=salt, algorithm="HS256")
-        return Response({'code': 200, 'token': jwt_token, 'username': user_obj.user_name})
+        return Response({'code': 200, 'token': jwt_token, 'username': user})
 
 
 class LoginView(APIView):
@@ -271,6 +280,21 @@ class UserView(ModelViewSet):
     queryset = models.User.objects.all()
     serializer_class = UserSerializers
 
+    # 创建用户加密
+    def create(self, request, *args, **kwargs):
+        user = request.data.get("user_name")
+        user_obj = User.objects.filter(user_name=user).first()
+        if user_obj:
+            return Response({"code": 402, "error": "该用户已经注册,请更换帐号!"})
+        password = request.data.get("password")
+
+        hashed_password = make_password(password)
+        request.data['password'] = hashed_password
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
 
 class DeviceListView(ModelViewSet):
     """设备清单视图"""
@@ -334,6 +358,16 @@ class PaymentView(ModelViewSet):
 
     queryset = models.Payment.objects.all()
     serializer_class = PaymentSerializers
+    pagination_class = MyPageNumberPagination
+
+    # 进行条件查询
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        name = self.request.query_params.get('name')
+        if name:
+            queryset = queryset.filter(people__name=name)
+        queryset = queryset.order_by("-id")
+        return queryset
 
     def create(self, request):
         people = self.request.data.get("people")
@@ -383,6 +417,17 @@ class PaymentWaterElectricityView(ModelViewSet):
     """充值水电费视图"""
     queryset = models.PaymentWaterElectricity.objects.all()
     serializer_class = PaymentWaterElectricitySerializers
+    pagination_class = MyPageNumberPagination
+    # 进行条件查询
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        room_number = self.request.query_params.get('room_number')
+        # print(room_number)
+        if room_number:
+            queryset = queryset.filter(room_number__room_number=room_number)
+        queryset = queryset.order_by("-id")
+        return queryset
 
     def create(self, request):
         room_number = self.request.data.get("room_number")

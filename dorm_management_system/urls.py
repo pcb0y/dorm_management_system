@@ -50,7 +50,7 @@ router.register(r'BedNumber', views.BedNumberView, basename='BedNumber')  # 床�
 router.register(r'User', views.UserView, basename='User')  # 用户
 router.register(r'RoomNumber', views.RoomNumberView, basename='RoomNumber')  # 房间号
 router.register(r'DeviceList', views.DeviceListView, basename='DeviceList')  # 设备清单
-router.register(r'Payment', views.PaymentView, basename='Payment')  # 付款
+router.register(r'Payment', views.PaymentView, basename='Payment')  # 充值房租
 router.register(r'Deduction', views.DeductionView, basename='Deduction')  # 扣款
 router.register(r'PeopleName', views.PeopleNameView, basename='PeopleName')  # 用户姓名
 router.register(r'PaymentWaterElectricity', views.PaymentWaterElectricityView,

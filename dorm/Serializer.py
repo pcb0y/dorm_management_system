@@ -13,9 +13,11 @@ class RoomCategorySerializers(serializers.ModelSerializer):
 
 
 class UserSerializers(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
+
     class Meta:
         model = User
-        exclude = ["password", "power", "create_time"]
+        exclude = ["power", "create_time"]
 
 
 class RoomNumberSerializers(serializers.ModelSerializer):
@@ -64,6 +66,7 @@ class PeopleNameSerializers(serializers.ModelSerializer):
         model = People
         fields = ["id", "name"]
         # depth = 1
+
 
 class RoomsSerializers(serializers.ModelSerializer):
     class Meta:
@@ -177,6 +180,7 @@ class PaymentSerializers(serializers.ModelSerializer):
     class Meta:
         model = Payment
         fields = "__all__"
+        depth = 1
 
 
 class DeductionSerializers(serializers.ModelSerializer):
@@ -193,6 +197,8 @@ class PaymentWaterElectricitySerializers(serializers.ModelSerializer):
     class Meta:
         model = PaymentWaterElectricity
         fields = "__all__"
+        depth = 1
+
 
 
 class DeductionWaterElectricitySerializers(serializers.ModelSerializer):
