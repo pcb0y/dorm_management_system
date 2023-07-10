@@ -209,8 +209,11 @@ class People(models.Model):
     # 关联房屋
     room = models.ForeignKey(to=Room,  null=True, on_delete=models.SET_NULL, related_name="people",
                              verbose_name="房间号")
+
+    check_in_choices = ((1, "入住中"), (0, "已退房"))
+    check_in_stats = models.BooleanField(default=True, choices=check_in_choices, verbose_name='入住状态')
     # 创建时间
-    create_time = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
+    create_time = models.DateTimeField(auto_now_add=True, verbose_name="创建时间",)
 
     def __str__(self):
         return self.name
@@ -218,6 +221,15 @@ class People(models.Model):
     class Meta:
         verbose_name = "人员信息表"
         verbose_name_plural = verbose_name
+
+
+class CheckInRecord(models.Model):
+    """入住记录表"""
+    room = models.ForeignKey(to=Room, null=True, on_delete=models.SET_NULL, verbose_name="房间")
+    people = models.ForeignKey(to=People, null=True, on_delete=models.SET_NULL, verbose_name='人员')
+    check_in_remark = models.CharField(max_length=20, verbose_name="入住备注")
+    create_time = models.DateTimeField(auto_now_add=True, verbose_name="创建时间", )
+    create_user = models.ForeignKey(to=User, on_delete=models.CASCADE, verbose_name='创建人')
 
 
 class WaterElectricity(models.Model):

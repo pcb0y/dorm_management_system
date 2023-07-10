@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,re_path
 from dorm import views
-from rest_framework.routers import DefaultRouter # 导入路由器定义的包
+from rest_framework.routers import DefaultRouter  # 导入路由器定义的包
 
 
 urlpatterns = [
@@ -26,6 +26,9 @@ urlpatterns = [
     path('AddRentDetails/', views.AddRentDetailsView.as_view()),
     path('Count/', views.CountView.as_view()),
     path('updateRoomPeople/', views.UpdateRoomPeopleView.as_view()),
+    path('Checkout/<int:id>/', views.CheckoutView.as_view()),  # 退房
+    path('ImportWaterElectricity/', views.ImportWaterElectricityView.as_view()),  # 批量导入水电费
+
 
 
 
@@ -57,6 +60,7 @@ router.register(r'PaymentWaterElectricity', views.PaymentWaterElectricityView,
                 basename='PaymentWaterElectricity')  # 水电费充值
 router.register(r'DeductionWaterElectricity', views.DeductionWaterElectricityView,
                 basename='DeductionWaterElectricity')  # 扣水电费
+router.register(r'CheckInRecord', views.CheckInRecordView, basename='CheckInRecord')  # 入住记录
 
 
 # router.register(r'peoples', views.PeoplesView, basename='peoples')  # 向路由器中注册视图集，并起别名

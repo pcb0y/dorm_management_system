@@ -26,7 +26,8 @@ import datetime
 from .jwt_create_token import create_token
 from .jwt_authenticate import JWTQueryParamsAuthentication
 from rest_framework.pagination import PageNumberPagination
-
+import pandas as pd
+from rest_framework import generics
 # Create your views here.
 
 
@@ -44,7 +45,7 @@ class LoginView(APIView):
         user = request.data.get('username')
         pwd = request.data.get('password')
         user_obj = User.objects.filter(user_name=user).first()
-        print(user_obj)
+        # print(user_obj)
         if not user_obj:
             return Response({'code': 401, 'error': '用户名或密码错误'})
 
@@ -140,6 +141,7 @@ class RoomView(ModelViewSet):
     queryset = models.Room.objects.all()
     # serializer_class = RoomSerializers
     pagination_class = MyPageNumberPagination
+    ordering = ['-id']
 
     # 进行条件查询
     def get_queryset(self):
@@ -147,7 +149,7 @@ class RoomView(ModelViewSet):
         room_number = self.request.query_params.get('room_number')
         if room_number:
             queryset = queryset.filter(room_number=room_number)
-        return queryset
+        return queryset.order_by('-id')
     # 根据不同的请求走不同的序列化器
 
     def get_serializer_class(self):
@@ -162,6 +164,7 @@ class PeopleView(ModelViewSet):
     queryset = models.People.objects.all()
     serializer_class = PeopleSerializers
     pagination_class = MyPageNumberPagination
+    ordering = ['-id']
 
     # 进行条件查询
     def get_queryset(self):
@@ -169,7 +172,7 @@ class PeopleView(ModelViewSet):
         name = self.request.query_params.get('name')
         if name:
             queryset = queryset.filter(name__icontains=name)
-        return queryset
+        return queryset.order_by('-id')
 
     # 重写perform_create方法更新房间信息入住人数字段
     def perform_create(self, serializer):
@@ -181,7 +184,7 @@ class PeopleView(ModelViewSet):
         room_id = related_instance.id
         # 查找房间住的人数
         room_in_people = models.People.objects.filter(room_id=room_id).count()
-        print(room_in_people)
+        # print(room_in_people)
         # 更新房间表人数
         related_instance.number_of_people = room_in_people
         related_instance.empty_bed_number = related_instance.standard_number_of_people-room_in_people
@@ -200,7 +203,7 @@ class WaterElectricityView(ModelViewSet):
         room_number = self.request.query_params.get('room_number')
         if room_number:
             queryset = queryset.filter(room__room_number=room_number)
-        return queryset
+        return queryset.order_by("-id")
 
 
 class RentDetailsView(ModelViewSet):
@@ -218,6 +221,12 @@ class RepairReportView(ModelViewSet):
     queryset = models.RepairReport.objects.all()
     serializer_class = RepairReportSerializers
     pagination_class = MyPageNumberPagination
+
+    def get_queryset(self):
+        """倒序排列"""
+        queryset = super().get_queryset()
+
+        return queryset.order_by('-id')
 
 
 class DeviceDetailView(ModelViewSet):
@@ -480,7 +489,7 @@ class CountView(APIView):
         # 统计总房间数
         room_count = models.Room.objects.aggregate(room_count=Count('id'))
         # 统计已入住人数
-        people_sum = models.People.objects.aggregate(people_sum=Count('id'))
+        people_sum = models.People.objects.exclude(room=None).aggregate(people_sum=Count('id'))
 
         # 统计可住人数
 
@@ -513,3 +522,52 @@ class UpdateRoomPeopleView(APIView):
         return HttpResponse("ok")
 
 
+class CheckInRecordView(ModelViewSet):
+    """入住记录视图"""
+    queryset = models.CheckInRecord.objects.all()
+    serializer_class = CheckInRecordSerializers
+    pagination_class = MyPageNumberPagination
+
+    # 进行条件查询
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        room_number = self.request.query_params.get('room_number')
+        name = self.request.query_params.get('name')
+        # print(room_number)
+        if room_number:
+            queryset = queryset.filter(room__room_number=room_number)
+        if name:
+            queryset = queryset.filter(people__name=name)
+        queryset = queryset.order_by("-id")
+
+        return queryset
+
+
+class CheckoutView(APIView):
+    """退房视图"""
+
+    def put(self, request,id):
+
+        # 更新人员房间号字段为空,更新状态为退房状态
+        res = models.People.objects.filter(id=id).update(room=None, check_in_stats=0 )
+
+
+        return Response({"status": res})
+
+
+class ImportWaterElectricityView(generics.CreateAPIView):
+    """批量导入水电费视图"""
+    serializer_class = WaterElectricitySerializers
+
+    def create(self, request):
+
+        file = request.FILES.get('file')
+
+        df = pd.read_excel(file)
+
+        serializer = self.get_serializer(data=df.to_dict(orient='records'), many=True)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(status=201, headers=headers)
