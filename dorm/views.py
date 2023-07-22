@@ -28,6 +28,9 @@ from .jwt_authenticate import JWTQueryParamsAuthentication
 from rest_framework.pagination import PageNumberPagination
 import pandas as pd
 from rest_framework import generics
+from django.db import connection
+import os
+import io
 # Create your views here.
 
 
@@ -170,8 +173,12 @@ class PeopleView(ModelViewSet):
     def get_queryset(self):
         queryset = super().get_queryset()
         name = self.request.query_params.get('name')
+        room_number = self.request.query_params.get('room_number')
+
         if name:
             queryset = queryset.filter(name__icontains=name)
+        elif room_number:
+            queryset = queryset.filter(room__room_number__icontains=room_number)
         return queryset.order_by('-id')
 
     # 重写perform_create方法更新房间信息入住人数字段
@@ -571,3 +578,26 @@ class ImportWaterElectricityView(generics.CreateAPIView):
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         return Response(status=201, headers=headers)
+
+
+class ExportWaterElectricityView(APIView):
+    def get(self,request,*args,**kwargs):
+        month = request.query_params.get('month')
+        # 执行存储过程查询并返回
+        with connection.cursor() as cursor:
+            cursor.callproc('ExportWaterElectricity', ('202306',))
+            results = cursor.fetchall()
+            # print(results)
+        df = pd.DataFrame(results, columns=["年月数", "姓名", "房间号", "分摊金额"])
+        # 创建excel文件
+        excel_file = io.BytesIO()
+
+        excel_writer = pd.ExcelWriter(excel_file, )
+        df.to_excel(excel_writer, sheet_name='水电费应总金额', index=False)
+        excel_writer.save()
+        excel_file.seek(0)
+        response = HttpResponse(excel_file.read(),
+                                content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+
+        response['Content-Disposition'] = 'attachment;filename="水电费应总金额.xls"'
+        return response

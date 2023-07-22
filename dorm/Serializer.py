@@ -227,3 +227,5 @@ class CheckoutSerializers(serializers.ModelSerializer):
     class Meta:
         model = People
         fields = ["id", "check_in_stats", "room"]
+
+
