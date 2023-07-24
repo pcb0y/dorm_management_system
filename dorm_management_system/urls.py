@@ -29,6 +29,7 @@ urlpatterns = [
     path('Checkout/<int:id>/', views.CheckoutView.as_view()),  # 退房
     path('ImportWaterElectricity/', views.ImportWaterElectricityView.as_view()),  # 批量导入水电费
     path('ExportWaterElectricity/', views.ExportWaterElectricityView.as_view()),  # 导出水电费应付总金额
+    path('ExportWaterElectricityAll/', views.ExportWaterElectricityAllView.as_view()),  # 导出水电费应付总金额
 
 
 

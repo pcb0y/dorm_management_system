@@ -585,7 +585,7 @@ class ExportWaterElectricityView(APIView):
         month = request.query_params.get('month')
         # 执行存储过程查询并返回
         with connection.cursor() as cursor:
-            cursor.callproc('ExportWaterElectricity', ('202306',))
+            cursor.callproc('ExportWaterElectricity', (month,))
             results = cursor.fetchall()
             # print(results)
         df = pd.DataFrame(results, columns=["年月数", "姓名", "房间号", "分摊金额"])
@@ -600,4 +600,33 @@ class ExportWaterElectricityView(APIView):
                                 content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 
         response['Content-Disposition'] = 'attachment;filename="水电费应总金额.xls"'
+        return response
+
+
+class ExportWaterElectricityAllView(APIView):
+    def get(self, request,*args,**kwargs):
+        month = request.query_params.get('month')
+        sql_query = f"SELECT r.room_number,w.* from dorm_waterelectricity w INNER JOIN dorm_room r on r.id = w.room_id WHERE mouth='{month}'"
+
+        # 执行存储过程查询并返回
+        with connection.cursor() as cursor:
+            cursor.execute(sql_query)
+            results = cursor.fetchall()
+            # print(results)
+        df = pd.DataFrame(results, columns=["房间号", "ID", "", "水表码起", "水表码止", "水表度数", "水单价",
+                                            "水费金额", "水费录入时间", "电表码起", "电表码止", "电表度数", "电表单价",
+                                            "电表金额",
+                                            "电表录入时间", "房间号ID", "年月数", "应付金额", "扣款金额", "扣款时间",
+                                            "修改时间", "付款状态", "备注", "录入人ID"])
+        # 创建excel文件
+        excel_file = io.BytesIO()
+
+        excel_writer = pd.ExcelWriter(excel_file, )
+        df.to_excel(excel_writer, sheet_name='水电费全表', index=False)
+        excel_writer.save()
+        excel_file.seek(0)
+        response = HttpResponse(excel_file.read(),
+                                content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+
+        response['Content-Disposition'] = 'attachment;filename="水电费全表.xls"'
         return response
