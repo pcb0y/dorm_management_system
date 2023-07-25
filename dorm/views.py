@@ -613,10 +613,10 @@ class ExportWaterElectricityAllView(APIView):
             cursor.execute(sql_query)
             results = cursor.fetchall()
             # print(results)
-        df = pd.DataFrame(results, columns=["房间号", "ID", "", "水表码起", "水表码止", "水表度数", "水单价",
+        df = pd.DataFrame(results, columns=["房间号", "ID", "水表码起", "水表码止", "水表度数", "水单价",
                                             "水费金额", "水费录入时间", "电表码起", "电表码止", "电表度数", "电表单价",
                                             "电表金额",
-                                            "电表录入时间", "房间号ID", "年月数", "应付金额", "扣款金额", "扣款时间",
+                                            "电表录入时间", "房间号ID", "年月数", "应付金额", "扣款金额", "余额", "扣款时间",
                                             "修改时间", "付款状态", "备注", "录入人ID"])
         # 创建excel文件
         excel_file = io.BytesIO()
