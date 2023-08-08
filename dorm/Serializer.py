@@ -121,6 +121,7 @@ class RepairReportSerializers(serializers.ModelSerializer):
 class WaterElectricitySerializers(serializers.ModelSerializer):
     """水电管理序列化器"""
     room = serializers.CharField(read_only=True)
+    room_category = serializers.CharField(read_only=True, source="room.room_category")
     room_id = serializers.IntegerField(label="房间ID")
     WaterElectricity_Balance = serializers.CharField(read_only=True, source="room.WaterElectricity_Balance")
     electricity_payment_user = serializers.CharField(read_only=True)
@@ -212,9 +213,10 @@ class DeductionWaterElectricitySerializers(serializers.ModelSerializer):
 
 class CheckInRecordSerializers(serializers.ModelSerializer):
     """入住记录序列化器"""
-    room = serializers.CharField()
-    people = serializers.CharField()
-    create_user = serializers.CharField()
+
+    room_number = serializers.CharField(read_only=True, source="room.room_number")
+    people_name = serializers.CharField(read_only=True, source="people.name")
+    user_name = serializers.CharField(read_only=True, source="create_user.user_name")
 
     class Meta:
         model = CheckInRecord

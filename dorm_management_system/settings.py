@@ -53,7 +53,8 @@ INSTALLED_APPS = [
     # https模块
     # 'sslserver',
     # 'werkzeug_debugger_runserver',
-    # 'django_extensions'
+    # 'django_extensions',
+
 
 ]
 

@@ -26,6 +26,7 @@ import datetime
 from .jwt_create_token import create_token
 from .jwt_authenticate import JWTQueryParamsAuthentication
 from rest_framework.pagination import PageNumberPagination
+
 import pandas as pd
 from rest_framework import generics
 from django.db import connection
@@ -144,12 +145,19 @@ class RoomView(ModelViewSet):
     queryset = models.Room.objects.all()
     # serializer_class = RoomSerializers
     pagination_class = MyPageNumberPagination
+
     ordering = ['-id']
 
     # 进行条件查询
     def get_queryset(self):
         queryset = super().get_queryset()
         room_number = self.request.query_params.get('room_number')
+        # 获取空房间的条件
+        empty = self.request.query_params.get('empty')
+        if empty:
+            # 查询空房间
+            queryset = queryset.filter(people__room_id=None)
+
         if room_number:
             queryset = queryset.filter(room_number=room_number)
         return queryset.order_by('-id')
@@ -604,16 +612,17 @@ class ExportWaterElectricityView(APIView):
 
 
 class ExportWaterElectricityAllView(APIView):
+    """导出水电费"""
     def get(self, request,*args,**kwargs):
         month = request.query_params.get('month')
-        sql_query = f"SELECT r.room_number,w.* from dorm_waterelectricity w INNER JOIN dorm_room r on r.id = w.room_id WHERE mouth='{month}'"
+        sql_query = f"SELECT r.room_number,r.room_category,w.* from dorm_waterelectricity w INNER JOIN dorm_room r on r.id = w.room_id WHERE mouth='{month}'"
 
         # 执行存储过程查询并返回
         with connection.cursor() as cursor:
             cursor.execute(sql_query)
             results = cursor.fetchall()
             # print(results)
-        df = pd.DataFrame(results, columns=["房间号", "ID", "水表码起", "水表码止", "水表度数", "水单价",
+        df = pd.DataFrame(results, columns=["房间号", "房间类别", "ID", "水表码起", "水表码止", "水表度数", "水单价",
                                             "水费金额", "水费录入时间", "电表码起", "电表码止", "电表度数", "电表单价",
                                             "电表金额",
                                             "电表录入时间", "房间号ID", "年月数", "应付金额", "扣款金额", "余额", "扣款时间",
@@ -630,3 +639,68 @@ class ExportWaterElectricityAllView(APIView):
 
         response['Content-Disposition'] = 'attachment;filename="水电费全表.xls"'
         return response
+
+
+class ExportRoomView(APIView):
+    """导出房间"""
+    def get(self, request,*args,**kwargs):
+
+        sql_query = f"""SELECT *
+                        FROM dorm_room
+                        inner JOIN dorm_people ON dorm_room.id = dorm_people.room_id
+                        INNER JOIN dorm_bednumber on dorm_bednumber.id = dorm_people.bed_number_id
+                        INNER JOIN dorm_department on dorm_department.id = dorm_people.department_id
+                        INNER JOIN dorm_user on dorm_user.id = dorm_people.user_id
+                        INNER JOIN dorm_roomtype on dorm_roomtype.id = dorm_room.room_type_id
+                        INNER JOIN dorm_roomcategory on dorm_roomcategory.id = dorm_room.room_category_id
+                        INNER JOIN dorm_buildname on dorm_buildname.id = dorm_room.build_name_id
+                        """
+
+        # 执行存储过程查询并返回
+        with connection.cursor() as cursor:
+            cursor.execute(sql_query)
+            results = cursor.fetchall()
+            # print(results)
+        df = pd.DataFrame(results, columns=["房间ID", "房间号", "入住人数", "标配人数", "空闲人数", "房间类型ID", "设备ID",
+                                            "房间类别ID", "是否使用", "楼名ID", "楼层ID", "水电费余额", "人员ID", "姓名",
+                                            "性别", "电话", "身份证号", "入住日期", "退房日期", "房租单价", "人员备注",
+                                            "床号ID", "部门ID", "创建人ID", "房间ID", "创建时间", "租金单价ID", "结算时间", "租金余额",
+                                            "入住状态", "床号ID", "床号", "部门ID", "部门", "人员创建人ID", "人员录入人",
+                                            "密码", "权限", "创建时间", "房间类型ID", "房间类型", "房间类别ID", "房间类别",
+                                            "楼号ID", "楼号"])
+        # 创建excel文件
+        excel_file = io.BytesIO()
+
+        excel_writer = pd.ExcelWriter(excel_file, )
+        df.to_excel(excel_writer, sheet_name='宿舍房间和人员明细表', index=False)
+        excel_writer.save()
+        excel_file.seek(0)
+        response = HttpResponse(excel_file.read(),
+                                content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+
+        response['Content-Disposition'] = 'attachment;filename="宿舍房间和人员明细表.xls"'
+        return response
+
+
+class EveryFloorView(APIView):
+    """统计每一层人数占比"""
+    def get(self, request,*args,**kwargs):
+
+        sql_query = f"select floor_name name,count(1) value from dorm_room INNER JOIN dorm_floor on dorm_floor.id = dorm_room.floor_id inner JOIN dorm_people ON dorm_room.id = dorm_people.room_id GROUP BY floor_name"
+
+        # 执行存储过程查询并返回
+        with connection.cursor() as cursor:
+            cursor.execute(sql_query)
+            results = cursor.fetchall()
+            return_data = []
+
+            for name, value in results:
+                data = {}
+                data['name'] = name
+                data['value'] = value
+                return_data.append(data)
+            data1={"data": return_data}
+            data2=[data1]
+            series={"series":data2}
+            # print(series)
+        return JsonResponse(series, safe=False)

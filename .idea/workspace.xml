@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0927826d-5ab3-4f74-badb-7f7591287ab4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dorm/Serializer.py" beforeDir="false" afterPath="$PROJECT_DIR$/dorm/Serializer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dorm/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/dorm/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dorm_management_system/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/dorm_management_system/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dorm_management_system/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/dorm_management_system/urls.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,29 +39,12 @@
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dorm_management_system/settings.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="419">
-              <caret line="163" column="25" selection-start-line="163" selection-start-column="25" selection-end-line="163" selection-end-column="25" />
-              <folding>
-                <element signature="e#323#332#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dorm_management_system/__init__.py">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
+    <leaf>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dorm/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="618" column="92" selection-start-line="618" selection-start-column="92" selection-end-line="618" selection-end-column="92" />
+            <state relative-caret-position="677">
+              <caret line="704" selection-start-line="704" selection-end-line="704" selection-end-column="27" />
               <folding>
                 <element signature="e#0#48#0" expanded="true" />
               </folding>
@@ -66,17 +53,12 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/ae958384-8f77-4ca9-a079-f65f36230c78/console.sql">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dorm/Serializer.py">
+        <entry file="file://$PROJECT_DIR$/dorm_management_system/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="460">
-              <caret line="231" selection-start-line="231" selection-end-line="231" />
+            <state relative-caret-position="381">
+              <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
               <folding>
-                <element signature="e#0#38#0" expanded="true" />
+                <element signature="e#323#332#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -85,8 +67,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dorm_management_system/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="769">
-              <caret line="42" column="74" lean-forward="true" selection-start-line="42" selection-start-column="74" selection-end-line="42" selection-end-column="74" />
+            <state relative-caret-position="297">
+              <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
               <folding>
                 <element signature="e#646#678#0" expanded="true" />
               </folding>
@@ -97,12 +79,24 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dorm/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3378">
-              <caret line="239" column="8" selection-start-line="239" selection-start-column="4" selection-end-line="239" selection-end-column="8" />
+            <state relative-caret-position="430">
+              <caret line="135" column="17" selection-start-line="135" selection-start-column="4" selection-end-line="135" selection-end-column="17" />
               <folding>
                 <element signature="e#435#652#0" />
                 <element signature="e#693#946#0" />
                 <element signature="e#1383#1661#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dorm/Serializer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1228">
+              <caret line="231" lean-forward="true" selection-start-line="231" selection-end-line="231" />
+              <folding>
+                <element signature="e#0#38#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -172,11 +166,11 @@
         <option value="$PROJECT_DIR$/dorm/test1.py" />
         <option value="$PROJECT_DIR$/base/dingtshi.py" />
         <option value="$PROJECT_DIR$/base/__init__.py" />
-        <option value="$PROJECT_DIR$/dorm/models.py" />
         <option value="$PROJECT_DIR$/dorm/__init__.py" />
-        <option value="$PROJECT_DIR$/dorm/Serializer.py" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/ae958384-8f77-4ca9-a079-f65f36230c78/console.sql" />
+        <option value="$PROJECT_DIR$/dorm/models.py" />
         <option value="$PROJECT_DIR$/dorm_management_system/settings.py" />
+        <option value="$PROJECT_DIR$/dorm/Serializer.py" />
         <option value="$PROJECT_DIR$/dorm_management_system/urls.py" />
         <option value="$PROJECT_DIR$/dorm/views.py" />
       </list>
@@ -194,7 +188,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -211,6 +204,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -417,12 +411,13 @@
       <workItem from="1688947507384" duration="16952000" />
       <workItem from="1689033998810" duration="5796000" />
       <workItem from="1689326297348" duration="4748000" />
-      <workItem from="1689926245147" duration="17786000" />
+      <workItem from="1689926245147" duration="18426000" />
+      <workItem from="1691462550903" duration="16869000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="367595000" />
+    <option name="totallyTimeSpent" value="385104000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -437,13 +432,12 @@
     <frame x="-8" y="-8" width="1936" height="1048" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20362474" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20575693" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Database Console" weight="0.32932165" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32932165" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49573562" weight="0.31728664" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49573562" visible="true" weight="0.1214442" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39934355" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -455,6 +449,7 @@
       <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49626866" weight="0.32603937" />
       <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.4989339" weight="0.32932165" />
       <window_info anchor="bottom" id="manage.py@dorm_management_system" order="13" sideWeight="0.49626866" weight="0.32932165" />
+      <window_info anchor="bottom" id="Database Console" order="14" weight="0.32932165" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -699,26 +694,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/ae958384-8f77-4ca9-a079-f65f36230c78/console.sql">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/dorm_management_system/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/dorm/Serializer.py">
+    <entry file="file://$PROJECT_DIR$/dorm_management_system/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="231" selection-start-line="231" selection-end-line="231" />
+        <state relative-caret-position="381">
+          <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
           <folding>
-            <element signature="e#0#38#0" expanded="true" />
+            <element signature="e#323#332#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/ae958384-8f77-4ca9-a079-f65f36230c78/console.sql">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/dorm/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3378">
-          <caret line="239" column="8" selection-start-line="239" selection-start-column="4" selection-end-line="239" selection-end-column="8" />
+        <state relative-caret-position="430">
+          <caret line="135" column="17" selection-start-line="135" selection-start-column="4" selection-end-line="135" selection-end-column="17" />
           <folding>
             <element signature="e#435#652#0" />
             <element signature="e#693#946#0" />
@@ -727,20 +722,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dorm_management_system/settings.py">
+    <entry file="file://$PROJECT_DIR$/dorm/Serializer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="419">
-          <caret line="163" column="25" selection-start-line="163" selection-start-column="25" selection-end-line="163" selection-end-column="25" />
+        <state relative-caret-position="1228">
+          <caret line="231" lean-forward="true" selection-start-line="231" selection-end-line="231" />
           <folding>
-            <element signature="e#323#332#0" expanded="true" />
+            <element signature="e#0#38#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dorm_management_system/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="769">
-          <caret line="42" column="74" lean-forward="true" selection-start-line="42" selection-start-column="74" selection-end-line="42" selection-end-column="74" />
+        <state relative-caret-position="297">
+          <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
           <folding>
             <element signature="e#646#678#0" expanded="true" />
           </folding>
@@ -749,8 +744,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dorm/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="618" column="92" selection-start-line="618" selection-start-column="92" selection-end-line="618" selection-end-column="92" />
+        <state relative-caret-position="677">
+          <caret line="704" selection-start-line="704" selection-end-line="704" selection-end-column="27" />
           <folding>
             <element signature="e#0#48#0" expanded="true" />
           </folding>

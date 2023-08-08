@@ -30,6 +30,8 @@ urlpatterns = [
     path('ImportWaterElectricity/', views.ImportWaterElectricityView.as_view()),  # 批量导入水电费
     path('ExportWaterElectricity/', views.ExportWaterElectricityView.as_view()),  # 导出水电费应付总金额
     path('ExportWaterElectricityAll/', views.ExportWaterElectricityAllView.as_view()),  # 导出水电费应付总金额
+    path('ExportRoom/', views.ExportRoomView.as_view()),  # 导出房间人员
+    path('EveryFloor/', views.EveryFloorView.as_view()),  # 统计每层人数占比
 
 
 
