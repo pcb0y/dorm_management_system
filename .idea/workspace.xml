@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0927826d-5ab3-4f74-badb-7f7591287ab4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dorm/Serializer.py" beforeDir="false" afterPath="$PROJECT_DIR$/dorm/Serializer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dorm/jwt_authenticate.py" beforeDir="false" afterPath="$PROJECT_DIR$/dorm/jwt_authenticate.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dorm/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/dorm/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dorm_management_system/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/dorm_management_system/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dorm_management_system/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/dorm_management_system/urls.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,16 +39,33 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dorm/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="677">
-              <caret line="704" selection-start-line="704" selection-end-line="704" selection-end-column="27" />
+            <state relative-caret-position="403">
+              <caret line="710" column="19" selection-start-line="710" selection-start-column="14" selection-end-line="710" selection-end-column="19" />
               <folding>
                 <element signature="e#0#48#0" expanded="true" />
               </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dorm/jwt_authenticate.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="399">
+              <caret line="21" column="70" selection-start-line="21" selection-start-column="70" selection-end-line="21" selection-end-column="70" />
+              <folding>
+                <element signature="e#0#60#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/start.sh">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -67,8 +83,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dorm_management_system/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
+            <state relative-caret-position="377">
+              <caret line="67" column="27" selection-start-line="67" selection-start-column="18" selection-end-line="67" selection-end-column="27" />
               <folding>
                 <element signature="e#646#678#0" expanded="true" />
               </folding>
@@ -79,22 +95,21 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dorm/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="430">
-              <caret line="135" column="17" selection-start-line="135" selection-start-column="4" selection-end-line="135" selection-end-column="17" />
+            <state relative-caret-position="544">
+              <caret line="66" column="14" selection-start-line="66" selection-start-column="4" selection-end-line="66" selection-end-column="14" />
               <folding>
                 <element signature="e#435#652#0" />
                 <element signature="e#693#946#0" />
-                <element signature="e#1383#1661#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dorm/Serializer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1228">
-              <caret line="231" lean-forward="true" selection-start-line="231" selection-end-line="231" />
+            <state>
+              <caret line="60" column="19" selection-start-line="60" selection-start-column="19" selection-end-line="60" selection-end-column="19" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -113,7 +128,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>dorm_floor</find>
       <find>年月数</find>
       <find>AmountBalance</find>
       <find>year_month_id</find>
@@ -122,7 +136,6 @@
       <find>deduction_amount</find>
       <find>relativedelta</find>
       <find>RentDetails</find>
-      <find>print</find>
       <find>RepairReport</find>
       <find>peo</find>
       <find>DeviceList</find>
@@ -143,6 +156,8 @@
       <find>jwt</find>
       <find>PaymentWaterElectricityView</find>
       <find>入住记录</find>
+      <find>rent</find>
+      <find>print</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -153,7 +168,6 @@
       <list>
         <option value="$PROJECT_DIR$/dorm_management_system/Serializer.py" />
         <option value="E:/djano+vue实战派书笔记和源码code_20220919/myshop-test-20220919/myshop-test/myshop/settings.py" />
-        <option value="$PROJECT_DIR$/dorm/jwt_authenticate.py" />
         <option value="$PROJECT_DIR$/dorm/jwt_create_token.py" />
         <option value="$USER_HOME$/AppData/Local/Programs/Python/Python38/Lib/site-packages/pipreqs/pipreqs.py" />
         <option value="$PROJECT_DIR$/requirements.txt" />
@@ -170,9 +184,10 @@
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/ae958384-8f77-4ca9-a079-f65f36230c78/console.sql" />
         <option value="$PROJECT_DIR$/dorm/models.py" />
         <option value="$PROJECT_DIR$/dorm_management_system/settings.py" />
-        <option value="$PROJECT_DIR$/dorm/Serializer.py" />
         <option value="$PROJECT_DIR$/dorm_management_system/urls.py" />
         <option value="$PROJECT_DIR$/dorm/views.py" />
+        <option value="$PROJECT_DIR$/dorm/jwt_authenticate.py" />
+        <option value="$PROJECT_DIR$/dorm/Serializer.py" />
       </list>
     </option>
   </component>
@@ -198,7 +213,7 @@
             <path>
               <item name="dorm_management_system" type="b2602c69:ProjectViewProjectNode" />
               <item name="dorm_management_system" type="462c0819:PsiDirectoryNode" />
-              <item name="dorm_management_system" type="462c0819:PsiDirectoryNode" />
+              <item name="dorm" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -412,12 +427,12 @@
       <workItem from="1689033998810" duration="5796000" />
       <workItem from="1689326297348" duration="4748000" />
       <workItem from="1689926245147" duration="18426000" />
-      <workItem from="1691462550903" duration="16869000" />
+      <workItem from="1691462550903" duration="20496000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="385104000" />
+    <option name="totallyTimeSpent" value="388731000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -437,7 +452,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32932165" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49573562" visible="true" weight="0.1214442" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49573562" visible="true" weight="0.40262583" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39934355" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -461,16 +476,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/Downloads/drf-writable-nested-master/drf-writable-nested-master/example/serializers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python38/Lib/site-packages/django/db/models/fields/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="177">
@@ -523,16 +528,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="57">
           <caret line="3" column="16" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dorm/jwt_authenticate.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#60#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -700,6 +695,9 @@
     <entry file="file://$PROJECT_DIR$/dorm_management_system/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/start.sh">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/dorm_management_system/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="381">
@@ -712,42 +710,51 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dorm/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="135" column="17" selection-start-line="135" selection-start-column="4" selection-end-line="135" selection-end-column="17" />
+        <state relative-caret-position="544">
+          <caret line="66" column="14" selection-start-line="66" selection-start-column="4" selection-end-line="66" selection-end-column="14" />
           <folding>
             <element signature="e#435#652#0" />
             <element signature="e#693#946#0" />
-            <element signature="e#1383#1661#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dorm/Serializer.py">
+    <entry file="file://$PROJECT_DIR$/dorm/jwt_authenticate.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1228">
-          <caret line="231" lean-forward="true" selection-start-line="231" selection-end-line="231" />
+        <state relative-caret-position="399">
+          <caret line="21" column="70" selection-start-line="21" selection-start-column="70" selection-end-line="21" selection-end-column="70" />
           <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dorm_management_system/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
-          <folding>
-            <element signature="e#646#678#0" expanded="true" />
+            <element signature="e#0#60#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dorm/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="677">
-          <caret line="704" selection-start-line="704" selection-end-line="704" selection-end-column="27" />
+        <state relative-caret-position="403">
+          <caret line="710" column="19" selection-start-line="710" selection-start-column="14" selection-end-line="710" selection-end-column="19" />
           <folding>
             <element signature="e#0#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dorm_management_system/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="377">
+          <caret line="67" column="27" selection-start-line="67" selection-start-column="18" selection-end-line="67" selection-end-column="27" />
+          <folding>
+            <element signature="e#646#678#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dorm/Serializer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="60" column="19" selection-start-line="60" selection-start-column="19" selection-end-line="60" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
           </folding>
         </state>
       </provider>

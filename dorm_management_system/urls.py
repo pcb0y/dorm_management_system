@@ -65,6 +65,7 @@ router.register(r'PaymentWaterElectricity', views.PaymentWaterElectricityView,
 router.register(r'DeductionWaterElectricity', views.DeductionWaterElectricityView,
                 basename='DeductionWaterElectricity')  # 扣水电费
 router.register(r'CheckInRecord', views.CheckInRecordView, basename='CheckInRecord')  # 入住记录
+router.register(r'RentPrice', views.RentPriceView, basename='RentPrice')  # 租金单价
 
 
 # router.register(r'peoples', views.PeoplesView, basename='peoples')  # 向路由器中注册视图集，并起别名

@@ -12,6 +12,13 @@ class RoomCategorySerializers(serializers.ModelSerializer):
 # 定义用户表序列化器
 
 
+class RentPriceSerializers(serializers.ModelSerializer):
+    """租金单价序列化器"""
+    class Meta:
+        model = Rent
+        fields = "__all__"
+
+
 class UserSerializers(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
 
@@ -51,6 +58,7 @@ class PeopleSerializers(serializers.ModelSerializer):
     bed_number_name = serializers.CharField(read_only=True, source="bed_number.bed_name")
     user_name = serializers.CharField(read_only=True, source="user.user_name")
     room_name = serializers.CharField(read_only=True, source="room.room_number")
+    rent_price_name = serializers.CharField(read_only=True, source="rent_price.rent_price")
     remark = serializers.CharField(required=False, allow_null=True, allow_blank=True)
 
     class Meta:

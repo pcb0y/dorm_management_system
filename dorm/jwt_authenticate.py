@@ -6,7 +6,7 @@ from django.conf import settings
 class JWTQueryParamsAuthentication(BaseAuthentication):
     def authenticate(self, request):
         token = request.query_params.get('token')
-        print(token)
+        # print(token)
         if not token:
             raise AuthenticationFailed({"code": 401, "error": "登录成功后才能访问"})
         # 切割
@@ -20,7 +20,7 @@ class JWTQueryParamsAuthentication(BaseAuthentication):
             # print(unverified_payload)
             # 从token中获取payload【校验合法性】
             payload = jwt.decode(jwt=token, key=salt, algorithms=["HS256"])
-            print(payload)
+            # print(payload)
             return (payload,token)
         except jwt.exceptions.ExpiredSignatureError:
             error = "token已失效"

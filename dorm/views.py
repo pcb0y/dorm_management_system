@@ -114,7 +114,7 @@ class LoginView(APIView):
     def get(self, request, *args, **kwargs):
         token = request.query_params.get("token")
         salt = settings.SECRET_KEY
-        print(token, salt)
+        # print(token, salt)
         payload=None
         error = ""
         try:
@@ -123,20 +123,26 @@ class LoginView(APIView):
             # print(unverified_payload)
             # 从token中获取payload【校验合法性】
             payload = jwt.decode(token, salt, verify=True, algorithms="HS256")
-            print(payload)
+            # print(payload)
             return Response(f"已登录成功，欢迎！")
         except exceptions.ExpiredSignatureError:
             error = "token已失效"
             return Response({"code": 401, "error": error})
         except jwt.DecodeError:
             error = "token认证失败"
-            print(payload)
+            # print(payload)
             return Response({"code": 401, "error": error})
         except jwt.InvalidTokenError:
             error = "非法token"
             return Response({"code": 401, "error": error})
         if not payload:
             return Response({"code": 1003})
+
+
+class RentPriceView(ModelViewSet):
+    """租金单价视图"""
+    queryset = models.Rent.objects.all()
+    serializer_class = RentPriceSerializers
 
 
 class RoomView(ModelViewSet):
@@ -357,7 +363,7 @@ class AddRentDetailsView(APIView):
                 # 按天算租金
 
                 days_diff = date.today() - people['check_in_time']
-                print(days_diff.days)
+                # print(days_diff.days)
                 payable_amount = days_diff.days*people["rent_price__rent_price"]/num_days
 
             else:
@@ -366,7 +372,7 @@ class AddRentDetailsView(APIView):
             if previous_month < 10:
                 previous_month = "0" + str(previous_month)
             year_month = str(previous_year)+previous_month
-            print(year_month)
+            # print(year_month)
             # print(months_diff.months)
             device_obj_list.append(
                 RentDetails(
