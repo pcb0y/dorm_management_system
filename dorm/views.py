@@ -710,3 +710,21 @@ class EveryFloorView(APIView):
             series={"series":data2}
             # print(series)
         return JsonResponse(series, safe=False)
+
+
+class EndWaterAndEndElectricityView(APIView):
+    """获取上月电表码和水表码"""
+    def get(self, request,*args,**kwargs):
+        room_id = request.query_params.get('room_id')
+        sql_query = f"SELECT id,end_water_code,end_electricity_code from dorm_waterelectricity " \
+            f"WHERE room_id={room_id} ORDER BY id desc limit 1"
+
+        # 执行存储过程查询并返回
+        with connection.cursor() as cursor:
+            cursor.execute(sql_query)
+            results = cursor.fetchall()
+        if results:
+            data = {"end_water_code": results[0][1], "end_electricity_code": results[0][2]}
+        else:
+            data = {"end_water_code": 0, "end_electricity_code": 0}
+        return JsonResponse(data, safe=False)

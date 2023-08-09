@@ -32,6 +32,8 @@ urlpatterns = [
     path('ExportWaterElectricityAll/', views.ExportWaterElectricityAllView.as_view()),  # 导出水电费应付总金额
     path('ExportRoom/', views.ExportRoomView.as_view()),  # 导出房间人员
     path('EveryFloor/', views.EveryFloorView.as_view()),  # 统计每层人数占比
+    path('EndWaterAndEndElectricity/', views.EndWaterAndEndElectricityView.as_view()),  # 获取上月电表码和水表码
+
 
 
 
