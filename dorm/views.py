@@ -400,7 +400,7 @@ class PaymentView(ModelViewSet):
         return queryset
 
     def create(self, request):
-        people = self.request.data.get("people_id")
+        people = self.request.data.get("people")
         actual_amount = self.request.data.get("actual_amount")
         obj = models.People.objects.get(pk=people)
 

@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="0927826d-5ab3-4f74-badb-7f7591287ab4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dorm/Serializer.py" beforeDir="false" afterPath="$PROJECT_DIR$/dorm/Serializer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dorm/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/dorm/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dorm_management_system/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/dorm_management_system/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dorm_management_system/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/dorm_management_system/urls.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,8 +41,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dorm/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
-              <caret line="410" column="25" lean-forward="true" selection-start-line="410" selection-start-column="25" selection-end-line="410" selection-end-column="25" />
+            <state relative-caret-position="395">
+              <caret line="407" column="18" lean-forward="true" selection-start-line="407" selection-start-column="18" selection-end-line="407" selection-end-column="18" />
               <folding>
                 <element signature="e#0#48#0" expanded="true" />
               </folding>
@@ -108,8 +107,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dorm/Serializer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2746">
-              <caret line="78" column="52" selection-start-line="78" selection-start-column="52" selection-end-line="78" selection-end-column="52" />
+            <state relative-caret-position="269">
+              <caret line="193" lean-forward="true" selection-start-line="193" selection-end-line="193" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -183,11 +182,11 @@
         <option value="$PROJECT_DIR$/dorm/__init__.py" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/ae958384-8f77-4ca9-a079-f65f36230c78/console.sql" />
         <option value="$PROJECT_DIR$/dorm/jwt_authenticate.py" />
-        <option value="$PROJECT_DIR$/dorm/Serializer.py" />
         <option value="$PROJECT_DIR$/dorm/models.py" />
         <option value="$PROJECT_DIR$/dorm_management_system/settings.py" />
         <option value="$PROJECT_DIR$/dorm_management_system/urls.py" />
         <option value="$PROJECT_DIR$/gunicorn.conf.py" />
+        <option value="$PROJECT_DIR$/dorm/Serializer.py" />
         <option value="$PROJECT_DIR$/dorm/views.py" />
       </list>
     </option>
@@ -428,12 +427,12 @@
       <workItem from="1689033998810" duration="5796000" />
       <workItem from="1689326297348" duration="4748000" />
       <workItem from="1689926245147" duration="18426000" />
-      <workItem from="1691462550903" duration="32754000" />
+      <workItem from="1691462550903" duration="34516000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="400989000" />
+    <option name="totallyTimeSpent" value="402751000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -702,27 +701,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dorm/Serializer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2746">
-          <caret line="78" column="52" selection-start-line="78" selection-start-column="52" selection-end-line="78" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dorm/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="297" selection-start-line="297" selection-end-line="297" />
-          <folding>
-            <element signature="e#435#652#0" />
-            <element signature="e#693#946#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dorm_management_system/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="249">
@@ -750,10 +728,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/dorm/Serializer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="193" lean-forward="true" selection-start-line="193" selection-end-line="193" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dorm/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="297" selection-start-line="297" selection-end-line="297" />
+          <folding>
+            <element signature="e#435#652#0" />
+            <element signature="e#693#946#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/dorm/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="410" column="25" lean-forward="true" selection-start-line="410" selection-start-column="25" selection-end-line="410" selection-end-column="25" />
+        <state relative-caret-position="395">
+          <caret line="407" column="18" lean-forward="true" selection-start-line="407" selection-start-column="18" selection-end-line="407" selection-end-column="18" />
           <folding>
             <element signature="e#0#48#0" expanded="true" />
           </folding>
