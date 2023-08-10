@@ -72,3 +72,12 @@ router.register(r'RentPrice', views.RentPriceView, basename='RentPrice')  # 租�
 
 # router.register(r'peoples', views.PeoplesView, basename='peoples')  # 向路由器中注册视图集，并起别名
 urlpatterns += router.urls  # 将路由器中的所有路由信息追加到Django的路由列表（urlpatterns）中
+
+# from django.conf.urls import url
+# from django.conf.urls.static import static
+# from django.views.static import serve
+# from dorm_management_system.settings import *
+# urlpatterns = [
+#     url(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),
+#     url(r'^static/(?P<path>.*)$', serve, {'document_root': STATIC_ROOT}),
+# ]+ static(MEDIA_ROOT, document_root=MEDIA_ROOT)

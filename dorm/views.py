@@ -335,7 +335,7 @@ class DeviceListView(ModelViewSet):
 class AddRentDetailsView(APIView):
     @staticmethod
     def get(self):
-        peoples = models.People.objects.all().values("id", "rent_price__rent_price", "check_in_time")
+        peoples = models.People.objects.filter(check_in_stats=1).values("id", "rent_price__rent_price", "check_in_time")
         user = models.User.objects.filter(pk=5).first()
 
         device_obj_list = []
@@ -400,7 +400,7 @@ class PaymentView(ModelViewSet):
         return queryset
 
     def create(self, request):
-        people = self.request.data.get("people")
+        people = self.request.data.get("people_id")
         actual_amount = self.request.data.get("actual_amount")
         obj = models.People.objects.get(pk=people)
 
