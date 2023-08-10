@@ -4,7 +4,7 @@ from django.db import models
 # 设置水费单价
 default_water_price = 4.81
 # 设置电费单价
-default_electricity_price = 1.2
+default_electricity_price = 1
 
 
 class BuildName(models.Model):
