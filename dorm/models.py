@@ -271,12 +271,13 @@ class WaterElectricity(models.Model):
     # 应付总金额
     sum_amount = models.DecimalField(default=0, max_digits=20, decimal_places=2, verbose_name="应付总金额")
     # 扣款金额
-    deduction_amount = models.DecimalField(default=None, max_digits=20, decimal_places=2, verbose_name="扣款金额")
+    deduction_amount = models.DecimalField(default=None, null=True, max_digits=20, decimal_places=2,
+                                           verbose_name="扣款金额")
 
     # 扣款时间
-    deduction_time = models.DateTimeField(auto_now_add=True, verbose_name="扣款时间")
+    deduction_time = models.DateTimeField(auto_now_add=True, null=True, verbose_name="扣款时间")
     # 修改时间
-    modified_time = models.DateTimeField(auto_now=True, verbose_name="修改时间")
+    modified_time = models.DateTimeField(auto_now=True, null=True, verbose_name="修改时间")
     electricity_payment_user = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL, verbose_name="扣费人")
     # electricity_create_user = models.ForeignKey(to=User, default=1, on_delete=models.CASCADE, verbose_name="创建人")
     status = (
