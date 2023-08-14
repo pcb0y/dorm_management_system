@@ -660,6 +660,7 @@ class ExportRoomView(APIView):
                         INNER JOIN dorm_roomtype on dorm_roomtype.id = dorm_room.room_type_id
                         INNER JOIN dorm_roomcategory on dorm_roomcategory.id = dorm_room.room_category_id
                         INNER JOIN dorm_buildname on dorm_buildname.id = dorm_room.build_name_id
+                        INNER JOIN dorm_rent on dorm_rent.id= dorm_people.rent_price_id
                         """
 
         # 执行存储过程查询并返回
@@ -669,11 +670,11 @@ class ExportRoomView(APIView):
             # print(results)
         df = pd.DataFrame(results, columns=["房间ID", "房间号", "入住人数", "标配人数", "空闲人数", "房间类型ID", "设备ID",
                                             "房间类别ID", "是否使用", "楼名ID", "楼层ID", "水电费余额", "人员ID", "姓名",
-                                            "性别", "电话", "身份证号", "入住日期", "退房日期", "房租单价", "人员备注",
+                                            "性别", "电话", "身份证号", "入住日期", "退房日期", "押金", "人员备注",
                                             "床号ID", "部门ID", "创建人ID", "房间ID", "创建时间", "租金单价ID", "结算时间", "租金余额",
                                             "入住状态", "床号ID", "床号", "部门ID", "部门", "人员创建人ID", "人员录入人",
                                             "密码", "权限", "创建时间", "房间类型ID", "房间类型", "房间类别ID", "房间类别",
-                                            "楼号ID", "楼号"])
+                                            "楼号ID", "楼号", "租金单价ID", "租金单价"])
         # 创建excel文件
         excel_file = io.BytesIO()
 
