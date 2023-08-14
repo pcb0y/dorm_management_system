@@ -245,7 +245,7 @@ class WaterElectricity(models.Model):
     # 水费表码止
     end_water_code = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="水费表码止")
     # 水表合计
-    water_sum = models.DecimalField(max_digits=20, decimal_places=1, verbose_name="水表数")
+    water_sum = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="水表数")
     # 水费单价
     water_price = models.DecimalField(max_digits=20, decimal_places=2, default=default_water_price, verbose_name="水费单价")
     # 水费金额
