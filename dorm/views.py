@@ -621,11 +621,11 @@ class ExportWaterElectricityAllView(APIView):
     """导出水电费"""
     def get(self, request,*args,**kwargs):
         month = request.query_params.get('month')
-        sql_query = f"SELECT r.room_number,r.room_category,w.* from dorm_waterelectricity w INNER JOIN dorm_room r on r.id = w.room_id WHERE mouth='{month}'"
+        sql_query = "SELECT r.room_number,c.Room_Category_name,w.* from dorm_waterelectricity w INNER JOIN dorm_room r on r.id = w.room_id INNER JOIN dorm_roomcategory c on c.id = r.room_category_id WHERE mouth=%s"
 
         # 执行存储过程查询并返回
         with connection.cursor() as cursor:
-            cursor.execute(sql_query)
+            cursor.execute(sql_query, month)
             results = cursor.fetchall()
             # print(results)
         df = pd.DataFrame(results, columns=["房间号", "房间类别", "ID", "水表码起", "水表码止", "水表度数", "水单价",

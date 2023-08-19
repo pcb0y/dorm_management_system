@@ -165,7 +165,7 @@ DATABASES = {
         'NAME': 'dormtest',  # 你要存储数据的库名，事先要创建之
         'USER': 'root',  # 数据库用户名
         'PASSWORD': '9b5ff2d0a711ba2a',  # 密码
-        'HOST': '119.45.172.137',  # 主机
+        'HOST': 'mcml.vip',  # 主机
         'PORT': '3307',  # 数据库使用的端口
     }
 }

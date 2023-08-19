@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0927826d-5ab3-4f74-badb-7f7591287ab4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dorm/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/dorm/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dorm_management_system/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/dorm_management_system/settings.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,12 +37,12 @@
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dorm/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="532">
-              <caret line="691" column="30" lean-forward="true" selection-start-line="691" selection-start-column="30" selection-end-line="691" selection-end-column="30" />
+            <state relative-caret-position="592">
+              <caret line="628" column="39" lean-forward="true" selection-start-line="628" selection-start-column="39" selection-end-line="628" selection-end-column="39" />
               <folding>
                 <element signature="e#0#48#0" expanded="true" />
               </folding>
@@ -51,7 +53,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dorm/jwt_authenticate.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
+            <state relative-caret-position="361">
               <caret line="21" column="70" selection-start-line="21" selection-start-column="70" selection-end-line="21" selection-end-column="70" />
               <folding>
                 <element signature="e#0#60#0" expanded="true" />
@@ -68,8 +70,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dorm_management_system/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="497">
-              <caret line="201" column="19" lean-forward="true" selection-start-line="201" selection-start-column="19" selection-end-line="201" selection-end-column="19" />
+            <state relative-caret-position="3211">
+              <caret line="173" selection-start-line="173" selection-end-line="173" />
               <folding>
                 <element signature="e#323#332#0" expanded="true" />
               </folding>
@@ -80,7 +82,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dorm_management_system/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
+            <state relative-caret-position="1368">
               <caret line="75" selection-start-line="75" selection-start-column="2" selection-end-line="82" selection-end-column="49" />
               <folding>
                 <element signature="e#646#678#0" expanded="true" />
@@ -92,12 +94,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dorm/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="665">
-              <caret line="256" column="11" lean-forward="true" selection-start-line="256" selection-start-column="11" selection-end-line="256" selection-end-column="11" />
-              <folding>
-                <element signature="e#435#652#0" />
-                <element signature="e#693#946#0" />
-              </folding>
+            <state relative-caret-position="4864">
+              <caret line="256" column="11" selection-start-line="256" selection-start-column="11" selection-end-line="256" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -105,8 +103,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dorm/Serializer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22">
-              <caret line="174" column="26" lean-forward="true" selection-start-line="174" selection-start-column="26" selection-end-line="174" selection-end-column="26" />
+            <state relative-caret-position="3287">
+              <caret line="174" column="26" selection-start-line="174" selection-start-column="26" selection-end-line="174" selection-end-column="26" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -180,18 +178,17 @@
         <option value="$PROJECT_DIR$/dorm/__init__.py" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/ae958384-8f77-4ca9-a079-f65f36230c78/console.sql" />
         <option value="$PROJECT_DIR$/dorm/jwt_authenticate.py" />
-        <option value="$PROJECT_DIR$/dorm_management_system/settings.py" />
         <option value="$PROJECT_DIR$/dorm_management_system/urls.py" />
         <option value="$PROJECT_DIR$/gunicorn.conf.py" />
         <option value="$PROJECT_DIR$/dorm/Serializer.py" />
         <option value="$PROJECT_DIR$/dorm/models.py" />
+        <option value="$PROJECT_DIR$/dorm_management_system/settings.py" />
         <option value="$PROJECT_DIR$/dorm/views.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-371" />
-    <option name="y" value="158" />
+    <option name="x" value="5" />
     <option name="width" value="1936" />
     <option name="height" value="1048" />
   </component>
@@ -425,12 +422,15 @@
       <workItem from="1689033998810" duration="5796000" />
       <workItem from="1689326297348" duration="4748000" />
       <workItem from="1689926245147" duration="18426000" />
-      <workItem from="1691462550903" duration="37631000" />
+      <workItem from="1691462550903" duration="38255000" />
+      <workItem from="1692235649666" duration="516000" />
+      <workItem from="1692246546846" duration="16000" />
+      <workItem from="1692432170666" duration="292000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="405866000" />
+    <option name="totallyTimeSpent" value="407314000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -445,7 +445,7 @@
     <frame x="-8" y="-8" width="1936" height="1048" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20575693" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21215352" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -686,12 +686,20 @@
     <entry file="file://$PROJECT_DIR$/dorm_management_system/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/start.sh">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/gunicorn.conf.py" />
+    <entry file="file://$PROJECT_DIR$/dorm/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="592">
+          <caret line="628" column="39" lean-forward="true" selection-start-line="628" selection-start-column="39" selection-end-line="628" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dorm/jwt_authenticate.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
+        <state relative-caret-position="361">
           <caret line="21" column="70" selection-start-line="21" selection-start-column="70" selection-end-line="21" selection-end-column="70" />
           <folding>
             <element signature="e#0#60#0" expanded="true" />
@@ -699,9 +707,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/start.sh">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dorm_management_system/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3211">
+          <caret line="173" selection-start-line="173" selection-end-line="173" />
+          <folding>
+            <element signature="e#323#332#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/dorm_management_system/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
+        <state relative-caret-position="1368">
           <caret line="75" selection-start-line="75" selection-start-column="2" selection-end-line="82" selection-end-column="49" />
           <folding>
             <element signature="e#646#678#0" expanded="true" />
@@ -709,50 +730,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gunicorn.conf.py">
+    <entry file="file://$PROJECT_DIR$/dorm/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="66" lean-forward="true" selection-start-column="66" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dorm_management_system/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="497">
-          <caret line="201" column="19" lean-forward="true" selection-start-line="201" selection-start-column="19" selection-end-line="201" selection-end-column="19" />
-          <folding>
-            <element signature="e#323#332#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="4864">
+          <caret line="256" column="11" selection-start-line="256" selection-start-column="11" selection-end-line="256" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dorm/Serializer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="174" column="26" lean-forward="true" selection-start-line="174" selection-start-column="26" selection-end-line="174" selection-end-column="26" />
+        <state relative-caret-position="3287">
+          <caret line="174" column="26" selection-start-line="174" selection-start-column="26" selection-end-line="174" selection-end-column="26" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dorm/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="665">
-          <caret line="256" column="11" lean-forward="true" selection-start-line="256" selection-start-column="11" selection-end-line="256" selection-end-column="11" />
-          <folding>
-            <element signature="e#435#652#0" />
-            <element signature="e#693#946#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dorm/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="691" column="30" lean-forward="true" selection-start-line="691" selection-start-column="30" selection-end-line="691" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#48#0" expanded="true" />
           </folding>
         </state>
       </provider>
