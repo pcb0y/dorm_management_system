@@ -204,11 +204,13 @@ class DeductionSerializers(serializers.ModelSerializer):
 
 class PaymentWaterElectricitySerializers(serializers.ModelSerializer):
     """水电费充值序列化器"""
+    room_number = serializers.CharField(read_only=True, source="room_number.room_number")
+    user_name = serializers.CharField(read_only=True, source="create_user.user_name")
 
     class Meta:
         model = PaymentWaterElectricity
         fields = "__all__"
-        depth = 1
+        # depth = 1
 
 
 class DeductionWaterElectricitySerializers(serializers.ModelSerializer):

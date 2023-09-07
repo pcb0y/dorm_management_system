@@ -203,7 +203,7 @@ class People(models.Model):
     deposit = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="押金")
     # 关联租金单价表
     rent_price = models.ForeignKey(to=Rent, null=True, on_delete=models.CASCADE, verbose_name="租金单价")
-    balance = models.DecimalField(default=None, max_digits=20, decimal_places=2, verbose_name="余额", null=True)
+    balance = models.DecimalField(default=0, max_digits=20, decimal_places=2, verbose_name="余额", null=True)
     # 备注
     remark = models.CharField(max_length=11, null=True, blank=True, verbose_name="备注")
     # 关联房屋
